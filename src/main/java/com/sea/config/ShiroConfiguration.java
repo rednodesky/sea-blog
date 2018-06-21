@@ -4,6 +4,8 @@ import com.sea.shiroRedis.RedisCacheManager;
 import com.sea.shiroRedis.RedisManager;
 import com.sea.shiroRedis.RedisSessionDAO;
 import com.sea.shiroThymeleaf.dialect.ShiroDialect;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -24,6 +26,13 @@ import java.util.Map;
 @Configuration
 public class ShiroConfiguration {
 
+    //MD5加密
+    @Bean
+    public CredentialsMatcher credentialsMatcher(){
+        HashedCredentialsMatcher hashedCredentialsMatcher =  new HashedCredentialsMatcher("MD5");
+        hashedCredentialsMatcher.setHashIterations(2);
+        return hashedCredentialsMatcher;
+    }
 
     @Bean
     public ShiroDialect shiroDialect() {
@@ -86,6 +95,7 @@ public class ShiroConfiguration {
     @Bean
     public ShiroRealm myShiroRealm() {
         ShiroRealm myShiroRealm = new ShiroRealm();
+        myShiroRealm.setCredentialsMatcher(credentialsMatcher());
         return myShiroRealm;
     }
 

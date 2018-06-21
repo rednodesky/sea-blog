@@ -21,6 +21,8 @@ public class Permission {
 
     private String permission;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Role role;
+    private Long roleId;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Role role;
 }

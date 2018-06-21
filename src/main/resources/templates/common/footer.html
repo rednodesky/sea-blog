@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-    <div th:fragment="footer-content">
-        <footer class="footer text-right">
-            2017 © <a th:href="@{https://github.com/ZHENFENG13/My-Blog}" target="_blank">My Blog</a><div class=""></div>
-        </footer>
-    </div>
+
+<!-- footer 内容 -->
+<div th:fragment="footer-content">
+    <footer class="footer text-right">
+        2017 © <a th:href="@{https://github.com/rednodesky/sea-blog}" target="_blank">sea-blog</a><div class=""></div>
+    </footer>
+</div>
+
+<!-- footer 引入js 优化加载速度 -->
+<body th:fragment="footer">
+    <script th:src="@{static/lib/jquery-1.11.3.min.js}"></script>
+    <script th:src="@{static/lib/handlebars.min.js}"></script>
+    <script th:src="@{static/lib/app.js}"></script>
+    <script th:src="@{static/lib/jquery.easyfader.min.js}"></script>
+    <script th:src="@{static/lib/underscore-min.js}"></script>
+    <script th:src="@{static/lib/TweenLite.min.js}"></script>
+    <script th:src="@{static/lib/wangEditor.js}"></script>
+    <script th:src="@{static/lib/amazeui.min.js}"></script>
+    <script th:src="@{static/lib/amazeui.ie8polyfill.min.js}"></script>
+    <script th:src="@{static/lib/amazeui.widgets.helper.min.js}"></script>
 </body>
+
 </html>

@@ -1,10 +1,11 @@
 package com.sea.config;
 
+import com.sea.dao.PermissionRepository;
 import com.sea.dao.RoleRepository;
 import com.sea.modal.Permission;
 import com.sea.modal.Role;
 import com.sea.modal.User;
-import com.sea.service.LoginService;
+import com.sea.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,6 +14,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -25,10 +27,13 @@ public class ShiroRealm extends AuthorizingRealm {
 
     //用于用户查询
     @Autowired
-    private LoginService loginService;
+    private UserService userService;
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     //角色权限和对应权限添加
     @Override
@@ -36,14 +41,15 @@ public class ShiroRealm extends AuthorizingRealm {
         //获取登录用户名
         String loginName= (String) principalCollection.getPrimaryPrincipal();
         //查询用户名称
-        User user = loginService.findByLoginName(loginName);
+        User user = userService.findByLoginName(loginName);
         //添加角色和权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         List<Role> roleList =roleRepository.findByUserId(user.getUserId());
         for (Role role:roleList) {
             //添加角色
             simpleAuthorizationInfo.addRole(role.getRoleName());
-            for (Permission permission:role.getPermissions()) {
+            List<Permission> permissions = permissionRepository.findByRoleId(role.getId());
+            for (Permission permission:permissions) {
                 //添加权限
                 simpleAuthorizationInfo.addStringPermission(permission.getPermission());
             }
@@ -60,16 +66,18 @@ public class ShiroRealm extends AuthorizingRealm {
         }
         //获取用户信息
         String loginName = authenticationToken.getPrincipal().toString();
+
         if(StringUtils.isEmpty(loginName)){
             return null;
         }
-        User user = loginService.findByLoginName(loginName);
+        User user = userService.findByLoginName(loginName);
         if (user == null) {
             //这里返回后会报出对应异常
             return null;
         } else {
             //这里验证authenticationToken和simpleAuthenticationInfo的信息
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+            ByteSource credentialsSalt=ByteSource.Util.bytes(user.getLoginName());
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword(), credentialsSalt,getName());
             return simpleAuthenticationInfo;
         }
     }

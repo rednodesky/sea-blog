@@ -1,29 +1,23 @@
 package com.sea.controller;
 
-import com.sea.dao.UserRepository;
-import com.sea.modal.Role;
 import com.sea.modal.User;
-import com.sea.service.LoginService;
+import com.sea.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2018/5/22.
@@ -33,6 +27,8 @@ import java.util.Map;
 public class HomeController {
 
 
+    @Autowired
+    private UserService userService;
 
     @RequestMapping({"/","/index"})
     public ModelAndView index(){
@@ -99,31 +95,29 @@ public class HomeController {
         return "logout";
     }
 
+
+    @RequestMapping(value = "/register")
+    public String register(){
+        return "register";
+    }
+
     //错误页面展示
     @RequestMapping(value = "/error",method = RequestMethod.POST)
     public String error(){
         return "error ok!";
     }
 
-//    //数据初始化
-//    @RequestMapping(value = "/addUser")
-//    public String addUser(@RequestBody Map<String,Object> map){
-//        User user = loginService.addUser(map);
-//        return "addUser is ok! \n" + user;
-//    }
-//
-//    //角色初始化
-//    @RequestMapping(value = "/addRole")
-//    public String addRole(@RequestBody Map<String,Object> map){
-//        Role role = loginService.addRole(map);
-//        return "addRole is ok! \n" + role;
-//    }
-//
-//    //注解的使用
-//    @RequiresRoles("admin")
-//    @RequiresPermissions("create")
-//    @RequestMapping(value = "/create")
-//    public String create(){
-//        return "Create success!";
-//    }
+    //注册
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(@ModelAttribute User user,HttpServletRequest request){
+        userService.registerUser(user);
+        UsernamePasswordToken token = new UsernamePasswordToken();
+        token.setUsername(user.getLoginName());
+        token.setPassword(user.getPassword().toCharArray());
+        SecurityUtils.getSubject().login(token);
+        request.getSession().setAttribute("user",user);
+        return "redirect:/index";
+    }
+
+
 }

@@ -1,4 +1,65 @@
-<head>
-    <link rel="import" href="templates/common/mata.html" />
-    <link rel="import" href="templates/common/headlib.html" />
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:fragment="headerFragment(title,active)">
+    <meta charset="utf-8"/>
+    <title>
+        <th:block th:text="${title!=null?title:'博客后台'}+'- My Blog'"></th:block>
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta content="Coderthemes" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}"/>
+    <link th:href="@{//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
 </head>
+
+<div th:fragment="header-body">
+    <header>
+        <!--menu begin-->
+        <div class="menu">
+            <nav class="nav" id="topnav">
+                <h1 class="logo"><a href="https://github.com/rednodesky/sea-blog">博客</a></h1>
+                <li><a href="index.html">网站首页</a></li>
+                <li><a href="about.html">关于我</a></li>
+                <li><a href="list.html">学无止境</a>
+                    <ul class="sub-nav">
+                        <li><a href="list.html">心得笔记</a></li>
+                        <li><a href="list.html">CSS3|Html5</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="time.html">时间轴</a></li>
+                <li><a href="gbook.html">留言</a></li>
+                <li><a href="info.html">内容页</a></li>
+                <!--search begin-->
+                <div id="search_bar" class="search_bar" style="float: left;margin-left: 200px">
+                    <form id="searchform" action="e/search/index.php" method="post" name="searchform">
+                        <input class="input" placeholder="" type="text" name="keyboard" id="keyboard">
+                        <input type="hidden" name="Submit" value="搜索"/>
+                        <span class="search_ico"></span>
+                    </form>
+                </div>
+
+                <div>
+                    <span shiro:authenticated="true">
+                        <span>欢迎您：<span th:text="${user.loginName}"></span></span>
+                        <!--<div th:if="">-->
+                            <!--<image href="" height="" width="" th:src="${user.icon}"></image>-->
+                        <!--</div>-->
+                    </span>
+                </div>
+                <div>
+                    <p shiro:guest="">
+                        <a class="hoverClass" style="color: #bdbdbd;" href="/login">登录</a>
+                        <a class="hoverClass" style="padding-left: 10px;color: #bdbdbd;" href="/register">注册</a>
+                    </p>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>
+
+</html>

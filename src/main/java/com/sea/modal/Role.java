@@ -27,6 +27,6 @@ public class Role {
 //    private User user;
     private Long userId;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
-    private List<Permission> permissions;
+//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
+//    private List<Permission> permissions;
 }
