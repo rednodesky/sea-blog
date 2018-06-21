@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  session-timeout: 30
+  tomcat.max-threads: 0
+  tomcat.uri-encoding: UTF-8
+
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+#    password: 123456
+    timeout: 3000
+    pool:
+      max-idle: 8
+      max-wait: -1
+      min-idle: 0
+      max-active: 8
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName : com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    initialSize: 1
+    minIdle: 1
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 50
+    maxPoolPreparedStatementPerConnectionSize: 20
+    maxActive: 100
+    filters: stat,wall,log4j,config
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jpa:
+    database : MYSQL
+    show-sql : true
+    hibernate:
+      ddl-auto : update
+      naming-strategy : org.hibernate.cfg.ImprovedNamingStrategy
+      naming:
+        physical-strategy:  com.sea.config.MySQLUpperCaseStrategy
+    properties:
+      hibernate:
+        dialect : org.hibernate.dialect.MySQL5Dialect
+    thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+#  session:
+#    store-type: none
