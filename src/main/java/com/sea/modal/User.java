@@ -45,7 +45,4 @@ public class User extends AuthCachePrincipal   {
 
     private Date createTime;
 
-
-//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-//    private List<Role> roles;
 }

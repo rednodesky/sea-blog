@@ -22,11 +22,6 @@ public class Role {
 
     private String roleName;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="USER_ID")
-//    private User user;
     private Long userId;
 
-//    @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
-//    private List<Permission> permissions;
 }

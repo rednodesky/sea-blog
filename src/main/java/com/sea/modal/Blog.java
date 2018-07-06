@@ -2,6 +2,7 @@ package com.sea.modal;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +47,9 @@ public class Blog {
     private Date createTime;
 
     private Long author;
+
+    @Transient
+    private String authorName;
 
     private Date updateTime;
 

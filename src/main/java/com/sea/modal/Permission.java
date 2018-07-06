@@ -23,6 +23,4 @@ public class Permission {
 
     private Long roleId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Role role;
 }

@@ -1,6 +1,11 @@
 package com.sea.controller;
 
+import com.sea.constant.CommonConstant;
+import com.sea.constant.enums.BannerType;
+import com.sea.modal.Blog;
 import com.sea.modal.User;
+import com.sea.service.BannerService;
+import com.sea.service.BlogService;
 import com.sea.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -10,11 +15,14 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,22 +34,27 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/")
 public class HomeController {
 
+    @Autowired
+    private BannerService bannerService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BlogService blogService;
 
     @RequestMapping({"/","/index"})
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("user",SecurityUtils.getSubject().getPrincipal());
+        modelAndView.addObject("carousels",bannerService.findByType(BannerType.CAROUSEL.getCode()));
+        modelAndView.addObject("topics",bannerService.findByType(BannerType.TOPIC.getCode()));
+        Page<Blog> blogs = blogService.findAll(0);
+        modelAndView.addObject("blogs",blogs);
+        modelAndView.addObject("pageCount",blogs.getTotalPages());
+
         return modelAndView;
     }
-
-//    @RequestMapping(value = "/all",method = RequestMethod.GET)
-//    public List<User> findAll(){
-//        return userRepository.findAll();
-//    }
-
 
     //退出的时候是get请求，主要是用于退出
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -72,7 +85,6 @@ public class HomeController {
 
             User user = (User) subject.getPrincipal();
             request.getSession().setAttribute("user",user);
-//            request.getSession().setAttribute("user",);
             // 获取保存的URL
             if (savedRequest == null || savedRequest.getRequestUrl() == null) {
                 return "redirect:/index";
@@ -101,12 +113,6 @@ public class HomeController {
         return "register";
     }
 
-    //错误页面展示
-    @RequestMapping(value = "/error",method = RequestMethod.POST)
-    public String error(){
-        return "error ok!";
-    }
-
     //注册
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String register(@ModelAttribute User user,HttpServletRequest request){
@@ -117,6 +123,21 @@ public class HomeController {
         SecurityUtils.getSubject().login(token);
         request.getSession().setAttribute("user",user);
         return "redirect:/index";
+    }
+
+
+
+    @RequestMapping(value = "/setting",method = RequestMethod.GET)
+    public String setting(){
+        return "setting";
+    }
+
+
+
+    //个人中心设置保存
+    @RequestMapping(value = "/setting",method = RequestMethod.POST)
+    public String setting(User user, CommonsMultipartFile multipartFile){
+        return "setting";
     }
 
 
