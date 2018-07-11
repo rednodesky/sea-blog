@@ -43,6 +43,8 @@ public class User extends AuthCachePrincipal   {
 
     private String emailAddress;
 
+    private Integer deleted;
+
     private Date createTime;
 
 }

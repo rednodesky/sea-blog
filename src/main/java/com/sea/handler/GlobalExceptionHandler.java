@@ -1,4 +1,4 @@
-package com.sea.controller;
+package com.sea.handler;
 
 import com.sea.exception.BaseException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

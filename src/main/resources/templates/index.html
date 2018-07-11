@@ -2,26 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>login</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+<!--<head>-->
+    <!--<meta charset="utf-8">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--<title>login</title>-->
+    <!--<meta name="renderer" content="webkit">-->
+    <!--<meta http-equiv="Cache-Control" content="no-siteapp"/>-->
+    <!--<meta name="mobile-web-app-capable" content="yes">-->
+    <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+    <!--<meta name="apple-mobile-web-app-title" content="Amaze UI"/>-->
 
     <link href="static/css/base.css" rel="stylesheet">
     <link href="static/css/index.css" rel="stylesheet">
     <link href="static/css/m.css" rel="stylesheet">
-
-</head>
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
 <body>
 <div th:replace="common/head :: header-body"></div>
-<article id="article" data-page-count="${pageCount}" >
+<article id="article" th:data-page-count="${pageCount}" >
 
     <!--banner begin-->
     <div class="picsbox">
@@ -50,16 +50,16 @@
     <!--blogsbox begin-->
     <div class="blogsbox" >
         <div th:each="blog:${blogs}" class="blogs" data-scroll-reveal="enter bottom over 1s" >
-            <h3 class="blogtitle"><a th:href="/blog/${blog.blogId}" th:target="${blog.target}" th:text="${topic.title}">别让这些闹心的套路，毁了你的网页设计!</a></h3>
+            <h3 class="blogtitle"><a th:href="'/blog/'+${blog.blogId}" th:target="_self" th:text="${blog.title}">别让这些闹心的套路，毁了你的网页设计!</a></h3>
 
-            <span class="blogpic" th:if="${blog.pic}"><a th:href="/blog/${blog.blogId}" title=""><img th:src="${blog.pic}" alt=""></a></span>
+            <span class="blogpic" th:if="${blog.pic}"><a th:href="'/blog/'+${blog.blogId}" title=""><img th:src="${blog.pic}" alt=""></a></span>
 
             <p class="blogtext" style="overflow:hidden;white-space: nowrap;text-overflow: ellipsis;" th:utext="${blog.content}">... </p>
             <div class="bloginfo">
                 <ul>
                     <li class="author"><a href="/" th:text="${blog.authorName}">夏海</a></li>
                     <!--<li class="lmname"><a href="/">学无止境</a></li>-->
-                    <li class="timer" th:text="${blog.createTime}">2018-5-13</li>
+                    <li class="timer" th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2018-5-13</li>
                     <li class="view"><span th:text="${blog.viewCount}">34567</span>已阅读</li>
                     <li class="like" th:text="${blog.priseCount}">9999</li>
                 </ul>
@@ -159,12 +159,37 @@
     </div>
 </article>
 
+<script type="text/x-handlebars-template" id="dataTemplate">
+    {{#each this}}
+    <div  class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="/blog/{{blogId}}" th:target="_self" >{{title}}</a></h3>
+
+        {{#if pic}}
+        <span class="blogpic" ><a href="/blog/{{pic}}" title=""><img src="{{pic}}" alt=""></a></span>
+        {{/if}}
+
+        <p class="blogtext" style="overflow:hidden;white-space: nowrap;text-overflow: ellipsis;">{{{blog.content}}} </p>
+        <div class="bloginfo">
+            <ul>
+                <li class="author"><a href="/" >{{authorName}}</a></li>
+                <li class="timer" >{{moment createTime}}</li>
+                <li class="view"><span >{{viewCount}}</span>已阅读</li>
+                <li class="like" >{{priseCount}}</li>
+            </ul>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+
+
 <div th:replace="common/footer :: footer-content"></div>
 <a href="#" class="cd-top">Top</a>
 <div th:replace="common/footer :: footer-lib"></div>
+
 <script src="static/js/conn.js"></script>
 <script src="static/js/nav.js"></script>
-<script src="static/js/scrollReveal.js"></script>
 <script src="static/js/scrollRefresh.js"></script>
+
 </body>
 </html>

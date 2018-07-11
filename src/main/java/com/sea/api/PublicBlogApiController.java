@@ -13,8 +13,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  * Created by Administrator on 2018/6/22.
  */
 @RestController
-@RequestMapping(value = CommonConstant.apiPrivatePath+"/blog")
-public class BlogApiController {
+@RequestMapping(value = CommonConstant.apiPublicPath+"/blog")
+public class PublicBlogApiController {
 
     @Autowired
     private BlogService blogService;
@@ -43,5 +43,7 @@ public class BlogApiController {
         blogService.delete(blogId);
         return HashMapResult.success();
     }
+
+
 
 }

@@ -128,19 +128,20 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> map = new HashMap<String, String>();
 
-
         map.put("/druid/**", "anon");
         map.put("/static/**", "anon");
-        map.put("/images/**", "anon");
-        map.put("/favicon.ico", "anon");
         map.put("/index", "anon");
-        map.put("/error", "anon");
         map.put("/", "anon");
+        map.put("/error", "anon");
         map.put("/register", "anon");
         map.put("/forget-password", "anon");
 
-        map.put("/login","authc");
+        map.put("/login","anon");
         map.put("/logout","logout");
+
+        map.put("/public/api/**", "anon");
+        map.put("/private/api/**","authc");
+
         map.put("/**","authc");
 
         shiroFilterFactoryBean.setLoginUrl("/login");

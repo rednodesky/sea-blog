@@ -16,12 +16,6 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
-    @RequestMapping(value = "/{blogId}",method = RequestMethod.GET)
-    public ModelAndView blogDetail(@PathVariable Long blogId){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("blogId",blogId);
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/edit/{blogId}",method = RequestMethod.GET)
     public ModelAndView editBlog(@PathVariable Long blogId){

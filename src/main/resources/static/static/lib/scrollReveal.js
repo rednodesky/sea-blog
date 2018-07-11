@@ -45,15 +45,6 @@ window.scrollReveal = (function (window) {
     };
   }());
 
-  function scrollReveal(options) {
-
-      this.options = this.extend(this.defaults, options);
-      this.docElem = this.options.elem;
-      this.styleBank = {};
-
-      if (this.options.init == true) this.init();
-  }
-
   scrollReveal.prototype = {
 
     defaults: {
@@ -408,6 +399,15 @@ window.scrollReveal = (function (window) {
       return a;
     }
   }; // end scrollReveal.prototype
+
+    function scrollReveal(options) {
+
+        this.options = this.extend(this.defaults, options);
+        this.docElem = this.options.elem;
+        this.styleBank = {};
+
+        if (this.options.init == true) this.init();
+    }
 
   return scrollReveal;
 })(window);

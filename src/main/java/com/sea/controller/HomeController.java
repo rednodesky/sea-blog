@@ -1,8 +1,8 @@
 package com.sea.controller;
 
-import com.sea.constant.CommonConstant;
 import com.sea.constant.enums.BannerType;
 import com.sea.modal.Blog;
+import com.sea.modal.HashMapResult;
 import com.sea.modal.User;
 import com.sea.service.BannerService;
 import com.sea.service.BlogService;
@@ -16,12 +16,9 @@ import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -141,4 +138,33 @@ public class HomeController {
     }
 
 
+//    @RequestMapping(value = "/public/api/blog",method = RequestMethod.GET)
+//    public Page<Blog> findAll(@RequestParam(value = "page")Integer page){
+//        return blogService.findAll(page);
+//    }
+//
+//    @RequestMapping(value = "/public/api/blog",method = RequestMethod.POST)
+//    @ResponseBody
+//    public HashMapResult addBlog(@ModelAttribute Blog blog, @RequestParam(value = "file") CommonsMultipartFile file){
+//        blogService.addBlog(blog,file);
+//        return HashMapResult.success();
+//    }
+//
+//
+//    @RequestMapping(value = "/private/api/edit/{blogId}",method = RequestMethod.GET)
+//    @ResponseBody
+//    public ModelAndView editBlog(@PathVariable Long blogId){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("blogId",blogId);
+//        return modelAndView;
+//    }
+//
+//
+//
+//    @RequestMapping(value = "/private/api/{blogId}",method = RequestMethod.DELETE)
+//    @ResponseBody
+//    public HashMapResult deleteBlog(@PathVariable Long blogId){
+//        blogService.delete(blogId);
+//        return HashMapResult.success();
+//    }
 }

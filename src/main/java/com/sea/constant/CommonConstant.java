@@ -12,9 +12,11 @@ public class CommonConstant {
 
     public static final String apiPrivatePath = "/private/api";
 
+    public static final String apiPublicPath = "/public/api";
+
     public static final Integer RECORD_NOT_DELETED = 0;
 
     public static final Integer RECORD_DELETED = 1;
 
-    public static final Integer PAGE_SIZE = 10;
+    public static final Integer PAGE_SIZE = 5;
 }

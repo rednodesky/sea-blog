@@ -5,6 +5,7 @@ server:
   tomcat.uri-encoding: UTF-8
 
 spring:
+  resources: static-locations:classpath:/META-INF/,classpath:/templates/,classpath:/static/
   redis:
     database: 0
     host: 127.0.0.1
