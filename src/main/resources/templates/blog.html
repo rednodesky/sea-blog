@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
+<body>
+<div th:replace="common/head :: header-body"></div>
+
+<article>
+<section id="category" >
+    <div>
+        <label style="line-height: 40px;min-height: 40px;font: inherit;" >分类:</label>
+        <select style="height:40px;width: 30%;font-size: 14px;background-color: #fff;border: 1px solid #ccc;border-radius: 4px;" class="categoryList"></select>
+    </div>
+</section>
+
+<section style="margin-top: 30px;" >
+    <input type="text" name="title" style="width: 100%;border: 0;padding: 0 5px;font-size: 22px;height: 40px;" placeholder="请输入标题">
+    <div class="content" id="content"></div>
+    <div class="btns-box">
+        <a href="javascript:;" class="btn preview">预览</a>
+        <a href="javascript:;" class="btn save">保存草稿</a>
+        <a href="javascript:;" class="btn publish">发布</a>
+    </div>
+</section>
+</article>
+<div th:replace="common/footer :: footer-content"></div>
+<a href="#" class="cd-top">Top</a>
+<div th:replace="common/footer :: footer-lib"></div>
+<script src="/static/js/blog.js"></script>
+</body>
+</html>

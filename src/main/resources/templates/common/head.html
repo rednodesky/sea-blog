@@ -13,7 +13,7 @@
     <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}"/>
     <link th:href="@{//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link th:href="@{/admin/css/style.min.css}" rel="stylesheet" type="text/css"/>
+    <!--<link th:href="@{/admin/css/style.min.css}" rel="stylesheet" type="text/css"/>-->
     <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
 </head>
 
@@ -23,7 +23,7 @@
         <div class="menu">
             <nav class="nav" id="topnav">
                 <h1 class="logo"><a href="https://github.com/rednodesky/sea-blog">博客</a></h1>
-                <li><a href="index.html">网站首页</a></li>
+                <li><a href="/">网站首页</a></li>
                 <li><a href="about.html">关于我</a></li>
                 <li><a href="list.html">学无止境</a>
                     <ul class="sub-nav">
@@ -47,6 +47,8 @@
                 <div>
                     <span shiro:authenticated="true">
                         <span>欢迎您：<span th:text="${user.loginName}"></span></span>
+                        <span><a href="/blog/create">写文章</a></span>
+                        <span><a href="logout">注销</a></span>
                         <!--<div th:if="">-->
                             <!--<image href="" height="" width="" th:src="${user.icon}"></image>-->
                         <!--</div>-->
