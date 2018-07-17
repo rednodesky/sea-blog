@@ -24,6 +24,10 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    public User getByUserId(Long userId){
+        return userRepository.getOne(userId);
+    }
+
     //添加用户
     public User addUser(Map<String, Object> map) {
         User user = new User();

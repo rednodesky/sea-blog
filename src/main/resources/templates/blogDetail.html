@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
+<body>
+<div th:replace="common/head :: header-body"></div>
+
+<article style="min-height: 690px;">
+    <div class="article" style="margin: 0 auto;width: 620px">
+        <h1 class="title" style="font-size: 34px;font-weight: 700;line-weight:1.3;margin: 20px 0 0;" th:text="${blog.title}"></h1>
+        <div class="author-info" style="margin: 30px 0 40px;">
+            <a class="icon" href="/" style="width: 48px;height: 48px;display:inline-block;vertical-align:middle;" ><img style="width: 100%;height: 100%" th:src="${author.icon}? #{author.icon} : @{/static/imgs/avatar.png}"></img></a>
+            <div class="info" style="display:inline-block;vertical-align:middle;">
+                <span th:text="${author.nickName}"></span>
+                <div class="meta">
+                    <span class="last-update" th:text="${author.updateTime}"></span>
+                    <span class="views-count" ></span>
+                    <span class="comments-count"></span>
+                    <span class="likes-count"></span>
+                </div>
+            </div>
+        </div>
+        <div class="pic"></div>
+        <div class="content" th:utext="${blog.content}"></div>
+
+    </div>
+    <div class="content-foot" style="margin: 0 auto;width: 620px;margin-bottom: 30px;" >
+        <div class="copyright" style="float: right;">
+            © 著作权归作者所有
+        </div>
+    </div>
+    <div class="share" style="margin: 0 auto;width: 620px">
+        <a href="/">分享到微信</a>
+        <a href="/">分享到微博</a>
+    </div>
+    <div class="comment" style="margin: 0 auto;width: 620px">
+        <div>
+            <form class="new-comment" style="margin-left: 48px;position: relative;">
+                <a style="left: -48px;position: absolute;vertical-align: middle;display: inline-block;width: 38px;height: 38px;" class="icon">
+                    <img style="width: 100%;height:100%;border:1px solid #ddd;border-radius: 50%" th:src="${author.icon}? #{author.icon} : @{/static/imgs/avatar.png}"></img>
+                </a>
+                <textarea style="resize: none;display:inline-block;vertical-align:top;outline-style:none;padding:10px 15px;height: 80px;width: 100%;font-size: 13px;border: 1px solid #dcdcdc;border-radius: 4px" placeholder="写下你的评论..."></textarea>
+            </form>
+        </div>
+        <div class="comment-list">
+
+        </div>
+    </div>
+
+</article>
+
+<div th:replace="common/footer :: footer-content"></div>
+    <a href="#" class="cd-top">Top</a>
+<div th:replace="common/footer :: footer-lib"></div>
+</body>
+</html>

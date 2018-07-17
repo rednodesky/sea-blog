@@ -10,14 +10,15 @@
     <meta content="Coderthemes" name="author"/>
     <meta name="API-PATH" content="localhost:8080" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}"/>
+    <link rel="shortcut icon" th:href="@{/static/imgs/favicon.png}"/>
     <link th:href="@{//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <!--<link th:href="@{/admin/css/style.min.css}" rel="stylesheet" type="text/css"/>-->
     <link th:href="@{//cdn.bootcss.com/limonte-sweetalert2/6.4.1/sweetalert2.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/css/amazeui.min.css}" rel="stylesheet"/>
 </head>
 
-<div th:fragment="header-body">
+<div th:fragment="header-body" style="height: 100px;">
     <header>
         <!--menu begin-->
         <div class="menu">

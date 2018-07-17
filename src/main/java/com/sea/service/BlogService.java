@@ -25,6 +25,9 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
+    public Blog getBlogById(Long blogId){
+        return blogRepository.getOne(blogId);
+    }
 
     public void addBlog(Blog blog, CommonsMultipartFile multipartFile){
         User user = (User) SecurityUtils.getSubject().getPrincipal();

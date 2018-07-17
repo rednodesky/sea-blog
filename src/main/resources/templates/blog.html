@@ -10,23 +10,23 @@
 <body>
 <div th:replace="common/head :: header-body"></div>
 
-<article>
-<section id="category" >
-    <div>
-        <label style="line-height: 40px;min-height: 40px;font: inherit;" >分类:</label>
-        <select style="height:40px;width: 30%;font-size: 14px;background-color: #fff;border: 1px solid #ccc;border-radius: 4px;" class="categoryList"></select>
-    </div>
-</section>
+<article style="height: 690px;">
+    <section id="category" >
+        <div>
+            <label style="line-height: 40px;min-height: 40px;font: inherit;" >分类:</label>
+            <select  class="categoryList" data-am-selected></select>
+        </div>
+    </section>
 
-<section style="margin-top: 30px;" >
-    <input type="text" name="title" style="width: 100%;border: 0;padding: 0 5px;font-size: 22px;height: 40px;" placeholder="请输入标题">
-    <div class="content" id="content"></div>
-    <div class="btns-box">
-        <a href="javascript:;" class="btn preview">预览</a>
-        <a href="javascript:;" class="btn save">保存草稿</a>
-        <a href="javascript:;" class="btn publish">发布</a>
-    </div>
-</section>
+    <section style="margin-top: 30px;" >
+        <input type="text" name="title" style="width: 100%;border: 0;padding: 0 5px;font-size: 22px;height: 40px;" placeholder="请输入标题">
+        <div class="content" id="content"></div>
+        <div class="btns-box" style="margin-top: 20px;text-align: right;margin-bottom: 20px;">
+            <a href="javascript:;" class="am-btn am-btn-primary btn-loading-example preview">预览</a>
+            <a href="javascript:;" class="am-btn am-btn-primary btn-loading-example save">保存草稿</a>
+            <a href="javascript:;" class="am-btn am-btn-primary btn-loading-example publish">发布</a>
+        </div>
+    </section>
 </article>
 <div th:replace="common/footer :: footer-content"></div>
 <a href="#" class="cd-top">Top</a>

@@ -2,6 +2,7 @@ package com.sea.controller;
 
 import com.sea.service.BlogService;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Administrator on 2018/6/22.
  */
 @Controller
-@RequestMapping(value = "/blog")
+@RequestMapping(value = "/user/blog")
 public class BlogController {
 
     @Autowired
     private BlogService blogService;
+
 
 
     @RequestMapping(value = "/edit/{blogId}",method = RequestMethod.GET)

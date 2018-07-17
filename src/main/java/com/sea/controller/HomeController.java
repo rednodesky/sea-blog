@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 
 /**
  * Created by Administrator on 2018/5/22.
@@ -138,33 +140,14 @@ public class HomeController {
     }
 
 
-//    @RequestMapping(value = "/public/api/blog",method = RequestMethod.GET)
-//    public Page<Blog> findAll(@RequestParam(value = "page")Integer page){
-//        return blogService.findAll(page);
-//    }
-//
-//    @RequestMapping(value = "/public/api/blog",method = RequestMethod.POST)
-//    @ResponseBody
-//    public HashMapResult addBlog(@ModelAttribute Blog blog, @RequestParam(value = "file") CommonsMultipartFile file){
-//        blogService.addBlog(blog,file);
-//        return HashMapResult.success();
-//    }
-//
-//
-//    @RequestMapping(value = "/private/api/edit/{blogId}",method = RequestMethod.GET)
-//    @ResponseBody
-//    public ModelAndView editBlog(@PathVariable Long blogId){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("blogId",blogId);
-//        return modelAndView;
-//    }
-//
-//
-//
-//    @RequestMapping(value = "/private/api/{blogId}",method = RequestMethod.DELETE)
-//    @ResponseBody
-//    public HashMapResult deleteBlog(@PathVariable Long blogId){
-//        blogService.delete(blogId);
-//        return HashMapResult.success();
-//    }
+    @RequestMapping(value = "/blog/{blogId}",method = RequestMethod.GET)
+    public ModelAndView blogDetail(@PathVariable Long blogId){
+        ModelAndView modelAndView = new ModelAndView("blogDetail");
+        Blog blog = blogService.getBlogById(blogId);
+        modelAndView.addObject("blog",blog);
+        modelAndView.addObject("author",userService.getByUserId(blog.getAuthor()));
+        modelAndView.addObject("comments", Collections.EMPTY_LIST);
+        return modelAndView;
+    }
+
 }

@@ -128,7 +128,9 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> map = new HashMap<String, String>();
 
+
         map.put("/druid/**", "anon");
+
         map.put("/static/**", "anon");
         map.put("/index", "anon");
         map.put("/", "anon");
@@ -136,16 +138,18 @@ public class ShiroConfiguration {
         map.put("/register", "anon");
         map.put("/forget-password", "anon");
 
-        map.put("/login","anon");
+//        map.put("/login","anon");
         map.put("/logout","logout");
 
         map.put("/public/api/**", "anon");
         map.put("/private/api/**","authc");
 
+        map.put("/blog/**","anon");
+
         map.put("/**","authc");
 
         shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;

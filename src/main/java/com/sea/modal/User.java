@@ -47,4 +47,6 @@ public class User extends AuthCachePrincipal   {
 
     private Date createTime;
 
+    private Date updateTime;
+
 }
