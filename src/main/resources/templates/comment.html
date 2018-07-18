@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
 <body>
-错误! <a href="/index">返回首页</a>
+<div th:replace="common/head :: header-body"></div>
+<article style="min-height: 690px">
+
+</article>
+
+<div th:replace="common/footer :: footer-content"></div>
+<div th:replace="common/footer :: footer-lib"></div>
+<script src="static/js/about.js"></script>
 </body>
 </html>

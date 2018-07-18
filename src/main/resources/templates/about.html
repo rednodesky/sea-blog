@@ -5,61 +5,58 @@
 <link href="/static/css/base.css" rel="stylesheet">
 <link href="/static/css/index.css" rel="stylesheet">
 <link href="/static/css/m.css" rel="stylesheet">
+
 <div th:replace="common/head :: headerFragment"></div>
 <!--</head>-->
-<body>
+<body style="background-color: #f7f7f7">
 <div th:replace="common/head :: header-body"></div>
-<article>
-    <div>
-        <h2>个人简介</h2>
+<article style="min-height: 690px">
+    <div style="background:rgba(255,255,255,.8);overflow: hidden;margin: 20px 0;padding:20px 50px">
+        <h2 style="padding:20px 0 20px 0;">个人简介</h2>
         <div >
-            <span></span>
+            <span style="display: inline;">夏海,男,来自物华天宝人杰地灵的南昌</span>
         </div>
-        <div>
-            <ul>
-                <li><a href="javascript:;">基本信息</a></li>
-                <li><a href="javascript:;">工作技能</a></li>
-                <li><a href="javascript:;">我的项目</a></li>
-                <li><a href="javascript:;">我的博客</a></li>
+        <div style="margin:30px 0;width:100%;overflow: hidden;border-bottom: #e4e3e3 1px solid;">
+            <ul class="" style="list-style: none;padding-left: 0;">
+                <li class="info active" style="display: block;font-size: 16px;line-height: 40px;float: left;width: 100px;text-align: center;"><a href="javascript:;">基本信息</a></li>
+                <li class="info" style="display: block;font-size: 16px;line-height: 40px;float: left;width: 100px;text-align: center;"><a href="javascript:;">工作技能</a></li>
+                <li class="info" style="display: block;font-size: 16px;line-height: 40px;float: left;width: 100px;text-align: center;"><a href="javascript:;">我的项目</a></li>
+                <li class="info" style="display: block;font-size: 16px;line-height: 40px;float: left;width: 100px;text-align: center;"><a href="javascript:;">我的博客</a></li>
             </ul>
         </div>
         <div >
             <div class="content">
-                <div>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                <div style="display: block">
+                    <p>身高:182cm</p>
+                    <p>体重:75KG</p>
+                    <p>出生年月:1993.06.27</p>
+                    <p>存款:0.00</p>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" style="display: none">
                 <div>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                    <p>java基础技能</p>
+                    <p>jquery、javascript基础技能</p>
+                    <p>羽毛球基础技能</p>
+                    <p>摄影基础技能</p>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" style="display: none">
                 <div>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                    <p>中信银行集采中心PMI项目</p>
+                    <p>思迪营销平台</p>
+                    <p>凡谷大地电商平台</p>
+                    <p>汇鑫捷扬讯科电商项目</p>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" style="display: none">
                 <div>
-                    <p></p>
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                    <p><a href="https://github.com/rednodesky/sea-blog">https://github.com/rednodesky/sea-blog</a></p>
                 </div>
             </div>
         </div>
     </div>
 </article>
-
 <div th:replace="common/footer :: footer-content"></div>
 <div th:replace="common/footer :: footer-lib"></div>
 <script src="static/js/about.js"></script>
