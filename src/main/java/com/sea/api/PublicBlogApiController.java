@@ -24,6 +24,7 @@ public class PublicBlogApiController {
         return blogService.findAll(page);
     }
 
+
     @RequestMapping(value = "",method = RequestMethod.POST)
     public HashMapResult addBlog(@ModelAttribute Blog blog,@RequestParam(value = "file") CommonsMultipartFile file){
         blogService.addBlog(blog,file);

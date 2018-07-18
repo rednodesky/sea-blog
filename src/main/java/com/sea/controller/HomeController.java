@@ -3,11 +3,9 @@ package com.sea.controller;
 import com.sea.constant.enums.BannerType;
 import com.sea.modal.Blog;
 import com.sea.modal.HashMapResult;
+import com.sea.modal.Message;
 import com.sea.modal.User;
-import com.sea.service.BannerService;
-import com.sea.service.BlogService;
-import com.sea.service.CategoryService;
-import com.sea.service.UserService;
+import com.sea.service.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -45,6 +43,9 @@ public class HomeController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping({"/","/index"})
     public ModelAndView index(){
@@ -171,6 +172,9 @@ public class HomeController {
     @RequestMapping(value = "/comment",method = RequestMethod.GET)
     public ModelAndView comment(){
         ModelAndView modelAndView = new ModelAndView("comment");
+        Page<Message> messages = messageService.findAll(0);
+        modelAndView.addObject("messages",messages);
+        modelAndView.addObject("pageCount",messages.getTotalPages());
         return modelAndView;
     }
 }

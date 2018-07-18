@@ -129,27 +129,25 @@ public class ShiroConfiguration {
         Map<String,String> map = new HashMap<String, String>();
 
 
-        map.put("/druid/**", "anon");
-
-        map.put("/static/**", "anon");
-        map.put("/index", "anon");
-        map.put("/", "anon");
-        map.put("/error", "anon");
-        map.put("/register", "anon");
-        map.put("/forget-password", "anon");
+//        map.put("/druid/**", "anon");
+//
+//        map.put("/static/**", "anon");
+//        map.put("/index", "anon");
+//        map.put("/", "anon");
+//        map.put("/error", "anon");
+//        map.put("/register", "anon");
+//        map.put("/forget-password", "anon");
 
         map.put("/logout","logout");
 
-        map.put("/public/api/**", "anon");
+//        map.put("/public/api/**", "anon");
+//        map.put("/blog/**","anon");
+//        map.put("/category","anon");
+//        map.put("/about","anon");
+
         map.put("/private/api/**","authc");
-
-        map.put("/blog/**","anon");
-        map.put("/category","anon");
-        map.put("/about","anon");
-
-
+        map.put("/user/**","authc");
         map.put("/**","anon");
-
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/");
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");
