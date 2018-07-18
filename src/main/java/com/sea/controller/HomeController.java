@@ -6,6 +6,7 @@ import com.sea.modal.HashMapResult;
 import com.sea.modal.User;
 import com.sea.service.BannerService;
 import com.sea.service.BlogService;
+import com.sea.service.CategoryService;
 import com.sea.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,7 +31,7 @@ import java.util.Collections;
  * Created by Administrator on 2018/5/22.
  */
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "")
 public class HomeController {
 
     @Autowired
@@ -41,6 +42,9 @@ public class HomeController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping({"/","/index"})
     public ModelAndView index(){
@@ -150,4 +154,23 @@ public class HomeController {
         return modelAndView;
     }
 
+
+    @RequestMapping(value = "/category",method = RequestMethod.GET)
+    public ModelAndView category(){
+        ModelAndView modelAndView = new ModelAndView("category");
+        modelAndView.addObject("categorys",categoryService.findAll());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/about",method = RequestMethod.GET)
+    public ModelAndView about(){
+        ModelAndView modelAndView = new ModelAndView("about");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/comment",method = RequestMethod.GET)
+    public ModelAndView comment(){
+        ModelAndView modelAndView = new ModelAndView("comment");
+        return modelAndView;
+    }
 }

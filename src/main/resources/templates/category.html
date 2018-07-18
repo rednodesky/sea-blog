@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+<link href="/static/css/category.css" rel="stylesheet">
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
+<body style="background-color: #f7f7f7">
+<div th:replace="common/head :: header-body"></div>
+<article style="width: 900px;min-height: 690px;">
+    <div class="post-lists">
+        <div class="post-lists-body">
+            <div th:each="category:${categorys}" class="post-list-item">
+                <div class="post-list-item-container">
+                    <div class="item-thumb bg-deepgrey" th:style="'background-image:url(' + ${category.image} + ');'"></div>
+                    <a th:href="'/category/' +${category.categoryId}">
+                        <div class="item-desc">
+                            <p th:text="${category.memo}"></p>
+                        </div>
+                    </a>
+                    <div class="item-slant reverse-slant bg-deepgrey"></div>
+                    <div class="item-slant"></div>
+                    <div class="item-label">
+                        <div class="item-title"><a th:href="'/category/' +${category.categoryId}" th:text="${category.name}">最近听的歌</a>
+                        </div>
+                        <div class="item-meta clearfix">
+                            <div class="item-meta-ico bg-ico-image" style="background: url(/static/imgs/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-meta-cat">
+                                <a href="javascript:;" th:text="${category.blogCount}+'篇'">数量</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div th:replace="common/footer :: footer-content"></div>
+<div th:replace="common/footer :: footer-lib"></div>
+<!--<script src="static/js/about.js"></script>-->
+</body>
+</html>
