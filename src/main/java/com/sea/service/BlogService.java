@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/6/22.
@@ -24,6 +25,10 @@ public class BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
+
+    public List<Blog> findAll(){
+        return blogRepository.findAll();
+    }
 
     public Blog getBlogById(Long blogId){
         return blogRepository.getOne(blogId);

@@ -45,7 +45,10 @@
 		</dependency>
 
 
-
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+		</dependency>
 
 		<!-- jpa -->
 		<dependency>

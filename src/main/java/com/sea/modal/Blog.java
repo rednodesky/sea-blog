@@ -1,7 +1,9 @@
 package com.sea.modal;
 
+import com.sea.annotation.SolrFieldMapping;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.solr.client.solrj.beans.Field;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,14 +18,20 @@ public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @SolrFieldMapping
+    @Field("id")
     private Long blogId;
 
     private String pic;
 
     private String categoryLevel;
 
+    @Field
+    @SolrFieldMapping
     private String title;
 
+    @Field
+    @SolrFieldMapping
     private String content;
 
     private Long viewCount;

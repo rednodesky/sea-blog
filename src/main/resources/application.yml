@@ -1,10 +1,13 @@
 server:
-  port: 8080
+  port: 8090
   session-timeout: 30
   tomcat.max-threads: 0
   tomcat.uri-encoding: UTF-8
 
 spring:
+  data:
+    solr:
+      host: http://127.0.0.1:8080/solr
   resources: static-locations:classpath:/META-INF/,classpath:/templates/,classpath:/static/
   redis:
     database: 0

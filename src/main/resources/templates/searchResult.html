@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<link href="/static/css/base.css" rel="stylesheet">
+<link href="/static/css/index.css" rel="stylesheet">
+<link href="/static/css/m.css" rel="stylesheet">
+<link href="/static/css/category.css" rel="stylesheet">
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
+<body>
+<div th:replace="common/head :: header-body"></div>
+<article style="min-height: 690px;max-width: 700px;">
+
+    <form id="comment-form" class="comment-form">
+        <input style="max-width: 309px;"  class="form-control input-control clearfix" name="name" placeholder="姓名(*)">
+        <input  style="max-width: 309px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">
+        <textarea  class="form-control" name="content" placeholder="基佬们,请**发炎吧!" minlength="5"></textarea>
+        <button style="margin-right: 20px;" class="submit" >提交</button>
+    </form>
+
+    <ol class="comment-list" th:data-page-count="${pageCount}" >
+        <li th:each="message:${messages}"  class="comment-body comment-parent comment-odd" data-scroll-reveal="enter bottom over 1s">
+            <div >
+                <div class="comment-view" onclick="">
+                    <div class="comment-header">
+                        <img class="avatar" src="https://cn.gravatar.com/avatar/67e3e5dad0363ea6a463b39c3e3e1f69?s=80&amp;r=G&amp;d=" title="fdf" width="80" height="80">
+                        <span class="comment-author">
+                                <a href="javascript:;" target="_blank" rel="external nofollow" th:text="${message.name}+'('+${message.email}+')'"></a>
+                            </span>
+                    </div>
+                    <div class="comment-content">
+                        <span class="comment-author-at"></span>
+                        <p></p><p th:text="${message.content}">teste</p>
+                        <p></p>
+                    </div>
+                    <div class="comment-meta">
+                        <time class="comment-time" th:text="${#dates.format(message.createTime,'yyyy-MM-dd')}" ></time>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</article>
+
+
+
+<script type="text/x-handlebars-template" id="dataTemplate">
+    {{#each this}}
+    <div  class="blogs" data-scroll-reveal="enter bottom over 1s">
+        <h3 class="blogtitle"><a href="/blog/{{blogId}}" th:target="_self" >{{title}}</a></h3>
+
+        {{#if pic}}
+        <span class="blogpic" ><a href="/blog/{{pic}}" title=""><img src="{{pic}}" alt=""></a></span>
+        {{/if}}
+
+        <p class="blogtext" style="overflow:hidden;white-space: normal;text-overflow: ellipsis;-webkit-line-clamp:1">{{{content}}} </p>
+        <div class="bloginfo">
+            <ul>
+                <li class="author"><a href="/" >{{authorName}}</a></li>
+                <li class="timer" >{{moment createTime}}</li>
+                <li class="view"><span >{{viewCount}}</span>已阅读</li>
+                <li class="like" >{{priseCount}}</li>
+            </ul>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+
+<div th:replace="common/footer :: footer-content"></div>
+<div th:replace="common/footer :: footer-lib"></div>
+</body>
+</html>

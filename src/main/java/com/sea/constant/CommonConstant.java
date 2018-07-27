@@ -19,4 +19,6 @@ public class CommonConstant {
     public static final Integer RECORD_DELETED = 1;
 
     public static final Integer PAGE_SIZE = 5;
+
+    public static final String PAGE_LIMIT = "5";
 }
