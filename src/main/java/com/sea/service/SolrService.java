@@ -142,7 +142,7 @@ public class SolrService {
             params.set("df", "content");
 
             //只查询指定域
-            params.set("fl", "id,content,title");
+            params.set("fl", "id,content,title,authorName,categoryName");
 
             //高亮
             //打开开关

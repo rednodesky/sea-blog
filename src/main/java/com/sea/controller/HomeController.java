@@ -1,5 +1,6 @@
 package com.sea.controller;
 
+import com.sea.constant.CommonConstant;
 import com.sea.constant.enums.BannerType;
 import com.sea.modal.Blog;
 import com.sea.modal.HashMapResult;
@@ -14,6 +15,7 @@ import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
+import org.apache.solr.common.util.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -46,6 +48,9 @@ public class HomeController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private SolrService solrService;
 
     @RequestMapping({"/","/index"})
     public ModelAndView index(){
@@ -176,5 +181,17 @@ public class HomeController {
         modelAndView.addObject("messages",messages);
         modelAndView.addObject("pageCount",messages.getTotalPages());
         return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public ModelAndView search(@RequestParam String q,@RequestParam(value = "page",defaultValue = "0")Integer page,
+                                @RequestParam(value = "limit",defaultValue = CommonConstant.PAGE_LIMIT)Integer limit){
+        ModelAndView modelAndView = new ModelAndView("searchResult");
+        HashMapResult hashMapResult = solrService.search(q,page,limit);
+        modelAndView.addObject("data",hashMapResult.get("data"));
+        modelAndView.addObject("pageSize",hashMapResult.get("pageSize"));
+        return modelAndView;
+//        return solrService.search(q,page,limit);
     }
 }

@@ -2,48 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<link href="/static/css/base.css" rel="stylesheet">
-<link href="/static/css/index.css" rel="stylesheet">
-<link href="/static/css/m.css" rel="stylesheet">
-<link href="/static/css/category.css" rel="stylesheet">
+
+<link href="static/css/base.css" rel="stylesheet">
+<link href="static/css/index.css" rel="stylesheet">
+<link href="static/css/m.css" rel="stylesheet">
 <div th:replace="common/head :: headerFragment"></div>
 <!--</head>-->
 <body>
 <div th:replace="common/head :: header-body"></div>
-<article style="min-height: 690px;max-width: 700px;">
+<article id="article" th:data-page-count="${pageCount}" >
 
-    <form id="comment-form" class="comment-form">
-        <input style="max-width: 309px;"  class="form-control input-control clearfix" name="name" placeholder="姓名(*)">
-        <input  style="max-width: 309px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">
-        <textarea  class="form-control" name="content" placeholder="基佬们,请**发炎吧!" minlength="5"></textarea>
-        <button style="margin-right: 20px;" class="submit" >提交</button>
-    </form>
+    <!--blogsbox begin-->
+    <div class="blogsbox" >
+        <div th:each="blog:${data}" class="blogs" data-scroll-reveal="enter bottom over 1s" >
+            <h3 class="blogtitle"><a th:href="'/blog/'+${blog.blogId}" th:target="_self" th:text="${blog.title}"></a></h3>
 
-    <ol class="comment-list" th:data-page-count="${pageCount}" >
-        <li th:each="message:${messages}"  class="comment-body comment-parent comment-odd" data-scroll-reveal="enter bottom over 1s">
-            <div >
-                <div class="comment-view" onclick="">
-                    <div class="comment-header">
-                        <img class="avatar" src="https://cn.gravatar.com/avatar/67e3e5dad0363ea6a463b39c3e3e1f69?s=80&amp;r=G&amp;d=" title="fdf" width="80" height="80">
-                        <span class="comment-author">
-                                <a href="javascript:;" target="_blank" rel="external nofollow" th:text="${message.name}+'('+${message.email}+')'"></a>
-                            </span>
-                    </div>
-                    <div class="comment-content">
-                        <span class="comment-author-at"></span>
-                        <p></p><p th:text="${message.content}">teste</p>
-                        <p></p>
-                    </div>
-                    <div class="comment-meta">
-                        <time class="comment-time" th:text="${#dates.format(message.createTime,'yyyy-MM-dd')}" ></time>
-                    </div>
-                </div>
+            <!--<span class="blogpic" th:if="${!#strings.isEmpty(blog.pic)}"><a th:href="'/blog/'+${blog.blogId}" title=""><img th:src="${blog.pic}" alt=""></a></span>-->
+
+            <p class="blogtext" style="overflow:hidden;white-space: normal;text-overflow: ellipsis;-webkit-line-clamp:1" th:utext="${blog.content}">... </p>
+            <div class="bloginfo">
+                <ul>
+                    <li class="author"><a href="/" th:text="${blog.authorName}">夏海</a></li>
+                    <!--<li class="lmname"><a href="/">学无止境</a></li>-->
+                    <li class="timer" th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2018-5-13</li>
+                    <!--<li class="view"><span th:text="${blog.viewCount}">34567</span>已阅读</li>-->
+                    <!--<li class="like" th:text="${blog.priseCount}">9999</li>-->
+                </ul>
             </div>
-        </li>
-    </ol>
+        </div>
+    </div>
 </article>
-
-
 
 <script type="text/x-handlebars-template" id="dataTemplate">
     {{#each this}}
@@ -68,7 +56,13 @@
 </script>
 
 
+
 <div th:replace="common/footer :: footer-content"></div>
+<a href="#" class="cd-top">Top</a>
 <div th:replace="common/footer :: footer-lib"></div>
+
+<script src="static/js/conn.js"></script>
+<script src="static/js/scrollRefresh.js"></script>
+
 </body>
 </html>
