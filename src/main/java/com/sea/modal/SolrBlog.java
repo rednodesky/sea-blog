@@ -6,25 +6,22 @@ import lombok.Setter;
 import org.apache.solr.client.solrj.beans.Field;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2018/6/21.
  */
-@Entity
 @Setter
 @Getter
-public class Blog {
+public class SolrBlog implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    private static final long serialVersionUID = 7351098417823632168L;
+
     @SolrFieldMapping
     @Field("id")
     private Long blogId;
 
-    private String pic;
-
-    private String categoryLevel;
 
     @Field
     @SolrFieldMapping
@@ -34,33 +31,25 @@ public class Blog {
     @SolrFieldMapping
     private String content;
 
-    private Long viewCount;
-
-    private Long priseCount;
-
-    private Integer stick;
-
-    private Integer sort;
-
-    private Integer status;
-
-    private Integer secret;
-
-    private Long commentCount;
-
     @Field
     @SolrFieldMapping
     private Date createTime;
 
-    private Long author;
-
-    @Transient
     @Field
     @SolrFieldMapping
     private String authorName;
 
-    private Date updateTime;
+    @Field
+    @SolrFieldMapping
+    private String categoryName;
 
-    private Integer deleted;
+    public SolrBlog(Long blogId, String title, String content, Date createTime,String authorName,String categoryName) {
+        this.blogId = blogId;
+        this.title = title;
+        this.content = content;
+        this.createTime = createTime;
+        this.authorName = authorName;
+        this.categoryName = categoryName;
+    }
 
 }
