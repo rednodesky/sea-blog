@@ -125,7 +125,7 @@ public class SolrService {
             SolrQuery params = new SolrQuery();
 
             //查询条件, 这里的 q 对应 下面图片标红的地方
-            q="content:"+q+" OR title:"+q+" OR id:"+q+" OR categoryName:"+q+" OR authorName:"+q;
+            q="_text_:\""+q+"\"";
             params.set("q", q);
 
             //过滤条件
@@ -142,7 +142,7 @@ public class SolrService {
             params.set("df", "content");
 
             //只查询指定域
-            params.set("fl", "id,content,title,authorName,categoryName");
+            params.set("fl", "id,content,title,authorName,categoryName,createTime");
 
             //高亮
             //打开开关
@@ -159,9 +159,9 @@ public class SolrService {
             SolrDocumentList results = queryResponse.getResults();
 
 
-            List<Blog> data=new ArrayList<>();
+            List<SolrBlog> data=new ArrayList<>();
             for (SolrDocument result : results) {
-                Blog blog = SolrUtil.getBean(Blog.class, result);
+                SolrBlog blog = SolrUtil.getBean(SolrBlog.class, result);
                 data.add(blog);
             }
 

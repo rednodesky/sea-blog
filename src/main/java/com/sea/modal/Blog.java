@@ -18,7 +18,7 @@ public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @SolrFieldMapping
+    @SolrFieldMapping("id")
     @Field("id")
     private Long blogId;
 
@@ -27,11 +27,11 @@ public class Blog {
     private String categoryLevel;
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("title")
     private String title;
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("content")
     private String content;
 
     private Long viewCount;
@@ -56,7 +56,7 @@ public class Blog {
 
     @Transient
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("authorName")
     private String authorName;
 
     private Date updateTime;

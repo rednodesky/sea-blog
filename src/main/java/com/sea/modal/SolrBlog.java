@@ -18,30 +18,34 @@ public class SolrBlog implements Serializable {
 
     private static final long serialVersionUID = 7351098417823632168L;
 
-    @SolrFieldMapping
+    @SolrFieldMapping("id")
     @Field("id")
     private Long blogId;
 
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("title")
     private String title;
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("content")
     private String content;
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("createTime")
     private Date createTime;
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("authorName")
     private String authorName;
 
     @Field
-    @SolrFieldMapping
+    @SolrFieldMapping("categoryName")
     private String categoryName;
+
+    public SolrBlog(){
+
+    }
 
     public SolrBlog(Long blogId, String title, String content, Date createTime,String authorName,String categoryName) {
         this.blogId = blogId;
