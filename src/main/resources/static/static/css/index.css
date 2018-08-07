@@ -100,7 +100,7 @@
 .cloud ul a:nth-child(8n) { background: #83AF9B }
 .cloud ul a:first-child { background: #036564 }
 .cloud ul a:last-child { background: #3299BB }
-.cloud ul a:hover { border-radius: 0; text-shadow: #000 1px 1px 1px }
+.cloud ul a:hover {  text-shadow: #000 1px 1px 1px }
 /*links*/
 .links ul { overflow: hidden }
 .links ul li { line-height: 24px; margin: 0 10px 10px 0; display: block; float: left }
