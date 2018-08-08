@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:wb=“http://open.weibo.com/wb”
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <link href="/static/css/base.css" rel="stylesheet">
 <link href="/static/css/index.css" rel="stylesheet">
 <link href="/static/css/m.css" rel="stylesheet">
+<link href="/static/css/category.css" rel="stylesheet">
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 <div th:replace="common/head :: headerFragment"></div>
 <!--</head>-->
-<body>
+<body style="background-color: #fff;">
 <div th:replace="common/head :: header-body"></div>
 
 <article style="min-height: 778px">
@@ -35,16 +38,18 @@
         </div>
     </div>
     <div class="share" style="margin: 0 auto;width: 620px">
-        <a href="/">分享到微信</a>
-        <a href="/">分享到微博</a>
+        <wb:share-button style="float:right" addition="simple"  language="zh_cn" type="button" size="small" ></wb:share-button>
+        <!--<a href="/">分享到微信</a>-->
+        <!--<a href="/">分享到微博</a>-->
     </div>
-    <div class="comment" style="margin: 0 auto;width: 620px">
+    <div class="comment detail-comment-form" style="margin: 0 auto;width: 620px">
         <div>
             <form class="new-comment" style="margin-left: 48px;position: relative;">
                 <a style="left: -48px;position: absolute;vertical-align: middle;display: inline-block;width: 38px;height: 38px;" class="icon">
                     <img style="width: 100%;height:100%;border:1px solid #ddd;border-radius: 50%" th:src="${author.icon}? #{author.icon} : @{/static/imgs/avatar.png}"></img>
                 </a>
                 <textarea style="resize: none;display:inline-block;vertical-align:top;outline-style:none;padding:10px 15px;height: 80px;width: 100%;font-size: 13px;border: 1px solid #dcdcdc;border-radius: 4px" placeholder="写下你的评论..."></textarea>
+                <input type="submit" class="submit" />
             </form>
         </div>
         <div class="comment-list">
