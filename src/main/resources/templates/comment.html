@@ -12,7 +12,7 @@
 <div th:replace="common/head :: header-body"></div>
 <article style="min-height: 778px;max-width: 700px;">
 
-    <form id="comment-form" class="comment-form">
+    <form id="comment-form" class="comment-form" method="post" action="/comment">
         <input style="max-width: 309px;"  class="form-control input-control clearfix" name="name" placeholder="姓名(*)">
         <input  style="max-width: 309px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">
         <textarea  class="form-control" name="content" placeholder="基佬们,请**发炎吧!" minlength="5"></textarea>
@@ -52,7 +52,7 @@
                     <div class="comment-header">
                         <img class="avatar" src="https://cn.gravatar.com/avatar/67e3e5dad0363ea6a463b39c3e3e1f69?s=80&amp;r=G&amp;d=" title="fdf" width="80" height="80">
                         <span class="comment-author">
-                                    <a href="" target="_blank" rel="external nofollow">{{name}}</a>
+                                    <a href="" target="_blank" rel="external nofollow">{{name}}({{email}})</a>
                                 </span>
                     </div>
                     <div class="comment-content">

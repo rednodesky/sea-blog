@@ -32,6 +32,7 @@ public class MessageService {
 
     public HashMapResult addMessage(Message message){
         message.setCreateTime(new Date());
+        messageRepository.save(message);
         return HashMapResult.success();
     }
 }

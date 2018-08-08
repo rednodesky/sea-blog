@@ -183,6 +183,12 @@ public class HomeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/comment",method = RequestMethod.POST)
+    public String submitComment(@ModelAttribute Message message){
+        messageService.addMessage(message);
+        return "redirect:/comment";
+    }
+
 
     @RequestMapping(value = "/search",method = RequestMethod.POST)
     public ModelAndView search(@RequestParam String q,@RequestParam(value = "page",defaultValue = "0")Integer page,
