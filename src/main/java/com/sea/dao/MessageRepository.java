@@ -2,6 +2,8 @@ package com.sea.dao;
 
 import com.sea.modal.Banner;
 import com.sea.modal.Message;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

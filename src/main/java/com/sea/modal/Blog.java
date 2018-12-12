@@ -24,7 +24,7 @@ public class Blog {
 
     private String pic;
 
-    private String categoryLevel;
+    private Long categoryId;
 
     @Field
     @SolrFieldMapping("title")

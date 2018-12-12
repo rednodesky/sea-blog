@@ -30,4 +30,8 @@ public class CategoryService {
     public List<Category> findAll(){
         return categoryRepository.findAllCategory();
     }
+
+    public Category getOne(Long categoryId){
+        return categoryRepository.getOne(categoryId);
+    }
 }

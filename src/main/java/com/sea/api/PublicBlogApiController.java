@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Administrator on 2018/6/22.
@@ -16,8 +17,16 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @RequestMapping(value = CommonConstant.apiPublicPath+"/blog")
 public class PublicBlogApiController {
 
+
     @Autowired
     private BlogService blogService;
+
+
+    @RequestMapping(value = "/{categoryId}")
+    public Page<Blog> categoryBlog(@PathVariable Long categoryId, @RequestParam(value = "page",defaultValue = "0")Integer page){
+        Page<Blog> data = blogService.findByCategoryId(categoryId,page);
+        return data;
+    }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public Page<Blog> findAll(@RequestParam(value = "page")Integer page){

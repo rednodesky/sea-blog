@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -32,6 +33,11 @@ public class BlogService {
 
     public Blog getBlogById(Long blogId){
         return blogRepository.getOne(blogId);
+    }
+
+    public Page<Blog> findByCategoryId(Long categoryId,Integer page){
+        Sort sort = new Sort(Sort.Direction.DESC,"CREATE_TIME");
+        return blogRepository.findAllByCategoryId(categoryId,PageRequest.of(page,CommonConstant.PAGE_SIZE,sort));
     }
 
     public void addBlog(Blog blog, CommonsMultipartFile multipartFile){

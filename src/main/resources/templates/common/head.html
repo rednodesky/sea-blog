@@ -25,7 +25,7 @@
             <nav class="nav" id="topnav">
                 <li class="logo"><a href="https://github.com/rednodesky/sea-blog">博客</a></li>
                 <li><a href="/">网站首页</a></li>
-                <li><a href="/category"><span>归档</span></a></li>
+                <li><a href="/category"><span>分类</span></a></li>
                 <li><a href="/about">关于我</a></li>
                 <li><a href="/comment">留言</a></li>
                 <!--search begin-->
@@ -37,22 +37,22 @@
                     </form>
                 </div>
 
-                <div>
-                    <span shiro:authenticated="true">
-                        <span>欢迎您：<span th:text="${user.loginName}"></span></span>
-                        <span><a href="/user/blog/create">写文章</a></span>
-                        <span><a href="logout">注销</a></span>
-                        <!--<div th:if="">-->
-                            <!--<image href="" height="" width="" th:src="${user.icon}"></image>-->
-                        <!--</div>-->
-                    </span>
-                </div>
-                <div>
-                    <p shiro:guest="">
-                        <a class="hoverClass" style="color: #bdbdbd;" href="/login">登录</a>
-                        <!--<a class="hoverClass" style="padding-left: 10px;color: #bdbdbd;" href="/register">注册</a>-->
-                    </p>
-                </div>
+                <!--<div>-->
+                    <!--<span shiro:authenticated="true">-->
+                        <!--<span>欢迎您：<span th:text="${user.loginName}"></span></span>-->
+                        <!--<span><a href="/user/blog/create">写文章</a></span>-->
+                        <!--<span><a href="logout">注销</a></span>-->
+                        <!--&lt;!&ndash;<div th:if="">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<image href="" height="" width="" th:src="${user.icon}"></image>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--</span>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<p shiro:guest="">-->
+                        <!--<a class="hoverClass" style="color: #bdbdbd;" href="/login">登录</a>-->
+                        <!--&lt;!&ndash;<a class="hoverClass" style="padding-left: 10px;color: #bdbdbd;" href="/register">注册</a>&ndash;&gt;-->
+                    <!--</p>-->
+                <!--</div>-->
             </nav>
         </div>
     </header>

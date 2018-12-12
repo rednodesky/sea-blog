@@ -3,30 +3,26 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
-<link href="static/css/base.css" rel="stylesheet">
-<link href="static/css/index.css" rel="stylesheet">
-<link href="static/css/m.css" rel="stylesheet">
+<link th:href="@{/static/css/base.css}"  rel="stylesheet">
+<link th:href="@{/static/css/index.css}" rel="stylesheet">
+<link  th:href="@{/static/css/m.css}"   rel="stylesheet">
 <div th:replace="common/head :: headerFragment"></div>
 <!--</head>-->
 <body>
 <div th:replace="common/head :: header-body"></div>
-<article  style="min-height: 778px;max-width: 800px;" id="article" th:data-page-count="${pageCount}" >
+<article  style="min-height: 778px;max-width: 800px;" id="article" th:data-page-count="${pageCount}"  th:data-category-id="${categoryId}">
 
     <!--blogsbox begin-->
     <div class="blogsbox" style="width:100%;">
+        <h2  style="margin-bottom:20px;">#<span th:text="${categoryName}"></span></h2>
         <div th:each="blog:${data}" class="blogs" data-scroll-reveal="enter bottom over 1s" >
             <h3 class="blogtitle"><a th:href="'/blog/'+${blog.blogId}" th:target="_self" th:text="${blog.title}"></a></h3>
-
-            <!--<span class="blogpic" th:if="${!#strings.isEmpty(blog.pic)}"><a th:href="'/blog/'+${blog.blogId}" title=""><img th:src="${blog.pic}" alt=""></a></span>-->
 
             <p class="blogtext" style="overflow:hidden;white-space: normal;text-overflow: ellipsis;-webkit-line-clamp:1" th:utext="${blog.content}">... </p>
             <div class="bloginfo">
                 <ul>
-                    <li class="author"><a href="/" th:text="${blog.authorName}">夏海</a></li>
-                    <!--<li class="lmname"><a href="/">学无止境</a></li>-->
+                    <li class="author"><a href="/" >夏海</a></li>
                     <li class="timer" th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2018-5-13</li>
-                    <!--<li class="view"><span th:text="${blog.viewCount}">34567</span>已阅读</li>-->
-                    <!--<li class="like" th:text="${blog.priseCount}">9999</li>-->
                 </ul>
             </div>
         </div>
@@ -55,13 +51,12 @@
 </script>
 
 
-
 <div th:replace="common/footer :: footer-content"></div>
 <a href="#" class="cd-top">Top</a>
 <div th:replace="common/footer :: footer-lib"></div>
 
-<script src="static/js/conn.js"></script>
-<script src="static/js/scrollRefresh.js"></script>
+<script th:src="@{/static/js/conn.js}"></script>
+<script th:src="@{/static/js/categorySearch.js}" ></script>
 
 </body>
 </html>
