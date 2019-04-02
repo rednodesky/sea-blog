@@ -37,7 +37,7 @@ public class BlogService {
 
     public Page<Blog> findByCategoryId(Long categoryId,Integer page){
         Sort sort = new Sort(Sort.Direction.DESC,"CREATE_TIME");
-        return blogRepository.findAllByCategoryId(categoryId,PageRequest.of(page,CommonConstant.PAGE_SIZE,sort));
+        return blogRepository.findAllByCategoryId(categoryId,PageRequest.of(page-1,CommonConstant.PAGE_SIZE,sort));
     }
 
     public void addBlog(Blog blog, CommonsMultipartFile multipartFile){
@@ -70,10 +70,14 @@ public class BlogService {
     }
 
     public Page<Blog> findAll(Integer page){
-        return blogRepository.findAll(PageRequest.of(page,CommonConstant.PAGE_SIZE));
+        return blogRepository.findAll(PageRequest.of(page-1,CommonConstant.PAGE_SIZE));
+    }
+
+    public Page<Blog> findAll(Integer page,Integer limit){
+        return blogRepository.findAll(PageRequest.of(page-1,limit));
     }
 
     public Page<Blog> findAllByAuthor(Long authorId,Integer page){
-        return blogRepository.findAllByAuthor(authorId, PageRequest.of(page,CommonConstant.PAGE_SIZE));
+        return blogRepository.findAllByAuthor(authorId, PageRequest.of(page-1,CommonConstant.PAGE_SIZE));
     }
 }

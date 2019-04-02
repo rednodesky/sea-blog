@@ -58,7 +58,7 @@ public class HomeController {
         modelAndView.addObject("user",SecurityUtils.getSubject().getPrincipal());
         modelAndView.addObject("carousels",bannerService.findByType(BannerType.CAROUSEL.getCode()));
         modelAndView.addObject("topics",bannerService.findByType(BannerType.TOPIC.getCode()));
-        Page<Blog> blogs = blogService.findAll(0);
+        Page<Blog> blogs = blogService.findAll(1);
         modelAndView.addObject("blogs",blogs);
         modelAndView.addObject("pageCount",blogs.getTotalPages());
 
@@ -177,7 +177,7 @@ public class HomeController {
     @RequestMapping(value = "/comment",method = RequestMethod.GET)
     public ModelAndView comment(){
         ModelAndView modelAndView = new ModelAndView("comment");
-        Page<Message> messages = messageService.findAll(0);
+        Page<Message> messages = messageService.findAll(1);
         modelAndView.addObject("messages",messages);
         modelAndView.addObject("pageCount",messages.getTotalPages());
         return modelAndView;

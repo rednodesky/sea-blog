@@ -22,8 +22,8 @@ public class PublicMessageApiController {
     private MessageService messageService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public Page<Message> findAll(@RequestParam(value = "page")Integer page){
-        return messageService.findAll(page);
+    public Page<Message> findAll(@RequestParam(value = "page",defaultValue = "1")Integer page){
+        return messageService. findAll(page);
     }
 
 

@@ -2,11 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!-- footer 内容 -->
-<div th:fragment="footer-content">
-    <footer class="footer text-right" style="background: #333">
-        2017 © <a th:href="@{https://github.com/rednodesky/sea-blog}" target="_blank">sea-blog</a><div class=""></div>
-    </footer>
-</div>
+<footer th:fragment="footer-content" class="footer text-right" style="background: #333">
+    2017 © <a th:href="@{https://github.com/rednodesky/sea-blog}" target="_blank">sea-blog</a><div class=""></div>
+</footer>
 
 <!-- footer 引入js 优化加载速度 -->
 <body th:fragment="footer-lib">

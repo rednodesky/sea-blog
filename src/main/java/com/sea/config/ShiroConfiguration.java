@@ -140,13 +140,13 @@ public class ShiroConfiguration {
 
         map.put("/logout","logout");
 
-//        map.put("/public/api/**", "anon");
+//        map.put("/public/api/**", "authc");
 //        map.put("/blog/**","anon");
 //        map.put("/category","anon");
 //        map.put("/about","anon");
 
         map.put("/private/api/**","authc");
-        map.put("/user/**","authc");
+//        map.put("/user/**","authc");
         map.put("/**","anon");
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/");

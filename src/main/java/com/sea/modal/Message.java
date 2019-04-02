@@ -29,5 +29,7 @@ public class Message {
 
     private Date createTime;
 
+    private Integer deleted;
+
 }
 

@@ -26,7 +26,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/{categoryId}")
-    public ModelAndView categoryBlog(@PathVariable Long categoryId, @RequestParam(value = "page",defaultValue = "0")Integer page){
+    public ModelAndView categoryBlog(@PathVariable Long categoryId, @RequestParam(value = "page",defaultValue = "1")Integer page){
         ModelAndView modelAndView = new ModelAndView("categoryResult");
         Page<Blog> data = blogService.findByCategoryId(categoryId,page);
         modelAndView.addObject("data",data);

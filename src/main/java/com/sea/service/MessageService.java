@@ -27,9 +27,15 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
+    public Page<Message> findAll(Integer page,Integer limit){
+        Sort sort=new Sort(Sort.Direction.DESC,"createTime");
+        Pageable pageable = PageRequest.of(page-1, limit, sort);
+        return messageRepository.findAll(pageable);
+    }
+
     public Page<Message> findAll(Integer page){
         Sort sort=new Sort(Sort.Direction.DESC,"createTime");
-        Pageable pageable = PageRequest.of(page, CommonConstant.PAGE_SIZE, sort);
+        Pageable pageable = PageRequest.of(page-1, CommonConstant.PAGE_SIZE, sort);
         return messageRepository.findAll(pageable);
     }
 
@@ -37,5 +43,13 @@ public class MessageService {
         message.setCreateTime(new Date());
         messageRepository.save(message);
         return HashMapResult.success();
+    }
+
+    public HashMapResult deleteMessage(Long messageId) {
+
+        Message message = messageRepository.getOne(messageId);
+        message.setDeleted(CommonConstant.RECORD_DELETED);
+        messageRepository.save(message);
+        return  HashMapResult.success();
     }
 }
