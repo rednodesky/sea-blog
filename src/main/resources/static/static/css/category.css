@@ -1877,7 +1877,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .comment-form .submit {
     font-size: 13px;
-    position: absolute;
+    /*position: absolute;*/
     right: 20px;
     bottom: 20px;
     display: block;
@@ -1903,7 +1903,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .detail-comment-form .submit {
     font-size: 13px;
-    position: absolute;
+    /*position: absolute;*/
     top:90px;
     right: 0px;
     bottom: 20px;

@@ -5,6 +5,7 @@ import com.sea.modal.Blog;
 import com.sea.modal.HashMapResult;
 import com.sea.modal.User;
 import com.sea.service.BlogService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -71,15 +72,25 @@ public class PublicBlogApiController {
         }
     }
 
+
     @RequestMapping(value = "/{categoryId}")
     public Page<Blog> categoryBlog(@PathVariable Long categoryId, @RequestParam(value = "page",defaultValue = "1")Integer page){
         Page<Blog> data = blogService.findByCategoryId(categoryId,page);
+        for(Blog blog:data.getContent()){
+            String withoutHtmlContent = blog.getContent().replaceAll("<(!|/)?(.|\\n)*?>", "");
+            blog.setContent(withoutHtmlContent);
+        }
         return data;
     }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public Page<Blog> findAll(@RequestParam(value = "page",defaultValue = "1")Integer page){
-        return blogService.findAll(page);
+        Page<Blog> data = blogService.findAll(page);
+        for(Blog blog:data.getContent()){
+            String withoutHtmlContent = blog.getContent().replaceAll("<(!|/)?(.|\\n)*?>", "");
+            blog.setContent(withoutHtmlContent);
+        }
+        return data;
     }
 
 

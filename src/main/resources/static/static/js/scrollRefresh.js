@@ -7,14 +7,27 @@ $(function () {
 
     this.init = function() {
         this.initVar();
+        this.initData()
     };
     this.initVar = function () {
         _this.$el = $("#article");
         _this.page=0;
         _this.pageCount = _this.$el.data("pageCount");
         _this.targetBody = $(".blogsbox",_this.$el);
+        window.scrollReveal = new scrollReveal({reset: true});
     };
-    
+
+    this.initData=function () {
+        $.ajax({
+            url:SEA.common.env.apiPublicPath + "/blog",
+            async:false
+        }).done(function(data){
+            var templateFun =  Handlebars.compile($("#dataTemplate").html());
+            _this.targetBody.append(templateFun(data.content));
+            _this.page = parseInt(_this.page)+1;
+            _this.pageCount = data.totalPages;
+        });
+    };
 
 
     this.refresh = function () {
