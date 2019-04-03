@@ -1927,6 +1927,36 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     background-color: #fff
 }
 
+
+
+.reply {
+    font-size: 11px;
+    /*position: absolute;*/
+    top:90px;
+    right: 0px;
+    bottom: 20px;
+    display: block;
+    height: 32px;
+    margin: 0 auto;
+    padding: 0 20px;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+    text-align: center;
+    color: #313131;
+    border: 1px solid #f7f7f7;
+    border-radius: 30px;
+    background-color: #f7f7f7
+}
+
+.reply:hover, .reply:active, .reply:active:focus, .reply:focus {
+    color: #eb5055;
+    border: 1px solid #eb5055;
+    outline-style: none;
+    background-color: #fff
+}
+
+
+
 .footer {
     position: relative;
     z-index: 1;

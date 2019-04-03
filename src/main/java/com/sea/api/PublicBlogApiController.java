@@ -2,9 +2,11 @@ package com.sea.api;
 
 import com.sea.constant.CommonConstant;
 import com.sea.modal.Blog;
+import com.sea.modal.Comment;
 import com.sea.modal.HashMapResult;
 import com.sea.modal.User;
 import com.sea.service.BlogService;
+import com.sea.service.CommentService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,7 +32,8 @@ import java.util.Map;
 @RequestMapping(value = CommonConstant.apiPublicPath+"/blog")
 public class PublicBlogApiController {
 
-
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private BlogService blogService;
@@ -115,5 +119,17 @@ public class PublicBlogApiController {
     }
 
 
+    @RequestMapping(value = "/comment/{blogId}",method = RequestMethod.POST)
+    public HashMapResult comment(@PathVariable Long blogId,
+                                 @ModelAttribute Comment comment){
+
+        return HashMapResult.success();
+    }
+
+
+    @RequestMapping(value = "/comment/{blogId}",method = RequestMethod.GET)
+    public List<Comment> getAllComment(@PathVariable Long blogId){
+        return commentService.findAllByBlogId(blogId);
+    }
 
 }
