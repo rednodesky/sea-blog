@@ -122,7 +122,7 @@ public class PublicBlogApiController {
     @RequestMapping(value = "/comment/{blogId}",method = RequestMethod.POST)
     public HashMapResult comment(@PathVariable Long blogId,
                                  @ModelAttribute Comment comment){
-
+        commentService.addComment(blogId,comment);
         return HashMapResult.success();
     }
 

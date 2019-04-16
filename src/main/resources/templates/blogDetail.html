@@ -32,60 +32,51 @@
         <div class="content" th:utext="${blog.content}"></div>
 
     </div>
-    <div class="content-foot" style="margin: 0 0 30px 0;width: 620px;" >
-        <div class="copyright" style="float: right;">
-            © 著作权归作者所有
-        </div>
-    </div>
+    <!--<div class="content-foot" style="margin: 0 0 30px 0;width: 620px;" >-->
+        <!--<div class="copyright" style="float: right;">-->
+            <!--© 著作权归作者所有-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="share" style="margin: 0 auto;width: 620px">
         <wb:share-button style="float:right" addition="simple"  language="zh_cn" type="button" size="small" ></wb:share-button>
     </div>
     <div class="comment detail-comment-form" style="margin: 0 auto;width: 620px">
-        <div>
-            <!--<form class="new-comment" style="margin-left: 48px;position: relative;">-->
-                <!--<a style="left: -48px;position: absolute;vertical-align: middle;display: inline-block;width: 38px;height: 38px;" class="icon">-->
-                    <!--<img style="width: 100%;height:100%;border:1px solid #ddd;border-radius: 50%" th:src="${author.icon}? #{author.icon} : @{/static/imgs/avatar.png}"></img>-->
-                <!--</a>-->
-                <!--<textarea name="content"  th:data-blog-id="${blog.blogId}" style="resize: none;display:inline-block;vertical-align:top;outline-style:none;padding:10px 15px;height: 80px;width: 100%;font-size: 13px;border: 1px solid #dcdcdc;border-radius: 4px" placeholder="写下你的评论..."></textarea>-->
-                <!--<input type="submit" class="submit" style="margin-top:20px;margin-right: 0px;" />-->
-            <!--</form>-->
-
-            <form  id="comment-form" class="comment-form">
-                <input style="max-width: 250px;"  class="form-control input-control clearfix" name="name" placeholder="姓名(*)">
-                <input  style="max-width: 250px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">
-                <textarea name="content" th:data-blog-id="${blog.blogId}"  class="form-control"  placeholder="写下你的评论..." minlength="5"></textarea>
-                <button style="margin-right: 20px;" class="submit" >提交</button>
-            </form>
-        </div>
         <div class="comment-list">
 
         </div>
+        <div>
+            <input type="hidden" id="commentId" />
+            <input type="hidden" id="parentId" />
+            <form  id="comment-form" class="comment-form">
+                <input style="max-width: 250px;"  class="form-control input-control clearfix"  name="name" placeholder="姓名(*)">
+                <input  style="max-width: 250px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">
+                <textarea name="content" th:data-blog-id="${blog.blogId}"  class="form-control"  placeholder="写下你的评论..." minlength="5"></textarea>
+                <button style="margin-right: 20px;" class="submit"  onClick="return false;"  >提交</button>
+            </form>
+        </div>
     </div>
-
 </article>
 
-
-
-
-<script type="text/x-handlebars-template" id="replyTemplate">
-    <form   class="comment-form reply-form">
-        <input style="max-width: 250px;"  class="form-control input-control clearfix" name="name" placeholder="姓名(*)">
-        <input  style="max-width: 250px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">
-        <textarea name="content"  class="form-control"  placeholder="写下你的评论..." minlength="5"></textarea>
-        <button style="margin-right: 20px;" class="submit" >提交</button>
-    </form>
-</script>
+<!--<script type="text/x-handlebars-template" id="replyTemplate">-->
+    <!--<form   class="comment-form reply-form">-->
+        <!--<input style="max-width: 250px;"  class="form-control input-control clearfix" name="name" placeholder="姓名(*)">-->
+        <!--<input  style="max-width: 250px;"  class="form-control input-control clearfix" name="email" placeholder="邮箱(*)">-->
+        <!--<textarea name="content"  class="form-control"  placeholder="写下你的评论..." minlength="5"></textarea>-->
+        <!--<button style="margin-right: 20px;" class="submit" >提交</button>-->
+    <!--</form>-->
+<!--</script>-->
 
 
 <script type="text/x-handlebars-template" id="dataTemplate">
     {{#each this}}
-        <li class="comment-body comment-parent comment-odd" data-scroll-reveal="enter bottom over 1s" style="margin-bottom: 20px;">
+        <li class="comment-body comment-parent comment-odd " data-parent-id="{{commentId}}" data-scroll-reveal="enter bottom over 1s" style="margin-bottom: 20px;">
             <div class="comment-view" >
                 <div class="comment-header">
                     <span class="comment-author" style="margin:0 0 0 0">
-                        <a href="javascript:;" target="_blank" rel="external nofollow">{{userName}}({{email}}):  {{content}}</a>
+                        <a href="javascript:;" target="_blank" rel="external nofollow">{{userName}}:  {{content}}</a>
                     </span>
-                    <button class="reply" style="float: right;margin-top:20px;" >回复</button>
+                    <button class="reply" data-user-name="{{userName}}"  data-comment-id="{{commentId}}" style="float: right;margin-top:20px;" >回复</button>
+                    <button  class="cancelReply reply"  style="display: none;float:right;margin-top:20px;">取消回复</button>
                 </div>
                 <div class="comment-meta">
                     <time class="comment-time"  >{{moment createTime}}</time>
@@ -94,9 +85,10 @@
                     {{#each children}}
                         <div class="comment-header" style="margin-left: 10px;" >
                             <span class="comment-author" style="margin:0 0 0 0">
-                                <a href="javascript:;" target="_blank" rel="external nofollow">{{userName}}({{email}}):@{{replyName}}  {{content}}</a>
+                                <a href="javascript:;" target="_blank" rel="external nofollow">{{userName}}:@{{replyName}}  {{content}}</a>
                             </span>
-                            <button  class="reply" style="float:right;margin-top:20px;">回复</button>
+                            <button data-user-name="{{userName}}"  class="reply" data-comment-id="{{commentId}}" style="float:right;margin-top:20px;">回复</button>
+                            <button    class="cancelReply reply"  style="display: none;float:right;margin-top:20px;">取消回复</button>
                         </div>
                         <div class="comment-meta" style="margin-left: 10px;">
                             <time class="comment-time"  >{{moment createTime}}</time>

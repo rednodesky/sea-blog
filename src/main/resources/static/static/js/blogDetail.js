@@ -21,7 +21,7 @@ $(function () {
             method:'get'
         }).done(function(data){
             var templateFun =  Handlebars.compile($("#dataTemplate").html());
-            $(".comment-list").append(templateFun(data));
+            $(".comment-list").empty().append(templateFun(data));
             scrollReveal.init();
         });
     };
@@ -33,24 +33,52 @@ $(function () {
                 return ;
             }
             var blogId = $("textarea[name=content]").data("blogId");
+            var data ={
+                content:$("textarea[name=content]").val(),
+                userName:$("input[name=name]").val(),
+                email:$("input[name=email]").val(),
+                parentId:$("#parentId").val(),
+                replyId:$("#commentId").val()
+            };
 
             $.ajax({
-                url:SEA.common.env.apiPublicPath + "/blog/"+blogId,
-                async:false
-            }).done(function(data){
-                var templateFun =  Handlebars.compile($("#dataTemplate").html());
-                _this.targetBody.append(templateFun(data.content));
-                _this.page = parseInt(_this.page)+1;
-                _this.pageCount = data.totalPages;
-                scrollReveal.init();
+                url:SEA.common.env.apiPublicPath + "/blog/comment/"+blogId,
+                data:data,
+                type: 'POST',
+            }).success(function(data){
+                if(data.success){
+                    $("#commentId").val("")
+                    $("#parentId").val("")
+                    $("textarea[name=content]").val("");
+                    $("input[name=name]").val("");
+                    $("input[name=email]").val("");
+                    _this.initComment();
+                }
             });
-        })
+
+            return false;
+        });
+
 
         $(document).on("click", ".reply", function(e) {
             var $target = $(e.target);
-            $(".reply-form").hide();
-            $target.parents("li").after($("#replyTemplate").html());
+            if(!$target.hasClass("cancelReply")){
+                $(".reply").show();
+                $(".cancelReply").hide();
+                $target.parents(".comment-header").find(".reply").hide();
+                $target.parents(".comment-header").find(".cancelReply").show();
+                $("#commentId").val($target.data("commentId"));
+                $("#parentId").val($target.parents("li").data("parentId"));
+                $('html,body').animate({scrollTop:$('.submit').offset().top}, 800);
+            }
+        });
 
+
+        $(document).on("click", ".cancelReply", function(e) {
+            $(".reply").show();
+            $(".cancelReply").hide();
+            $("#commentId").val("")
+            $("#parentId").val("")
         });
 
     };

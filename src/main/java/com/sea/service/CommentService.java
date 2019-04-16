@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,5 +25,12 @@ public class CommentService {
             i.setChildren(commentRepository.findAllByParentId(i.getCommentId()));
         });
         return data;
+    }
+
+
+    public void addComment(Long blogId ,Comment comment){
+        comment.setBlogId(blogId);
+        comment.setCreateTime(new Date());
+        commentRepository.save(comment);
     }
 }
