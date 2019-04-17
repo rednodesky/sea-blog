@@ -31,9 +31,6 @@ public class SolrService {
     @Autowired
     private SolrClient client;
 
-//    @Autowired
-//    private BlogService blogService;
-
     @Autowired
     private BlogRepository blogRepository;
 
