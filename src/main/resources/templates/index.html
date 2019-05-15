@@ -16,7 +16,12 @@
         <div class="picsbox">
             <div class="banner">
                 <div id="ban" class="fader"  >
-                    <li  th:each="carousel : ${carousels}" class="slide" ><a th:href="${carousel.link}" th:target="${carousel.target}"><img th:src="${carousel.src}"><span class="imginfo" th:text="${carousel.title}">别让这些闹心的套路，毁了你的网页设计!</span></a></li>
+                    <li  th:each="carousel : ${carousels}" class="slide" >
+                        <a th:href="${carousel.link}" th:target="${carousel.target}">
+                            <img th:src="${carousel.src}">
+                            <span class="imginfo" th:text="${carousel.title}"></span>
+                        </a>
+                    </li>
                     <div class="fader_controls">
                         <div class="page prev" data-target="prev">&lsaquo;</div>
                         <div class="page next" data-target="next">&rsaquo;</div>
@@ -28,7 +33,7 @@
             <!--banner end-->
             <div class="toppic" >
                 <li th:each="topic : ${topics}" > <a th:href="${topic.link}" th:target="${topic.target}"> <i><img th:src="${topic.src}"></i>
-                    <h2 th:text="${topic.title}">别让这些闹心的套路，毁了你的网页设计!</h2>
+                    <h2 th:text="${topic.title}"></h2>
                 </a>
                 </li>
             </div>
@@ -86,18 +91,14 @@
                 <!--</ul>-->
             <!--</div>-->
 
-            <div class="tuijian">
-                <h2 class="hometitle">点击排行</h2>
-                <!--<ul class="tjpic">-->
-                    <!--<i><img src="images/toppic01.jpg"></i>-->
-                    <!--<p><a href="/">别让这些闹心的套路，毁了你的网页设计</a></p>-->
+            <!--<div class="tuijian">-->
+                <!--<h2 class="hometitle">点击排行</h2>-->
+                <!--<ul class="sidenews">-->
+                    <!--<li> <i><img src="images/toppic01.jpg"></i>-->
+                        <!--<p><a href="/">别让这些闹心的套路</a></p>-->
+                        <!--<span>2018-05-13</span> </li>-->
                 <!--</ul>-->
-                <ul class="sidenews">
-                    <li> <i><img src="images/toppic01.jpg"></i>
-                        <p><a href="/">别让这些闹心的套路</a></p>
-                        <span>2018-05-13</span> </li>
-                </ul>
-            </div>
+            <!--</div>-->
 
             <!--<div class="cloud">-->
                 <!--<h2 class="hometitle">标签云</h2>-->
@@ -110,7 +111,7 @@
                 <ul>
                     <li><a href="http://www.baidu.com" target="_blank">百度</a></li>
                     <li><a href="http://www.baidu.com" target="_blank">微博</a></li>
-                    <li><a href="http://www.baidu.com" target="_blank">github</a></li>
+                    <li><a href="https://github.com/rednodesky/sea-blog" target="_blank">github</a></li>
                     <li><a href="http://www.baidu.com" target="_blank">简书</a></li>
                 </ul>
             </div>
@@ -130,7 +131,7 @@
                 <p class="blogtext" style="overflow:hidden;white-space: normal;text-overflow: ellipsis;-webkit-line-clamp:1">{{{content}}} </p>
                 <div class="bloginfo">
                     <ul>
-                        <li class="author"><a href="/" >夏海</a></li>
+                        <li class="author"><a href="/" >鱼跃此时海</a></li>
                         <li class="timer" >{{moment createTime}}</li>
                         <li class="view"><span >{{viewCount}}</span>已阅读</li>
                         <li class="like" >{{priseCount}}</li>

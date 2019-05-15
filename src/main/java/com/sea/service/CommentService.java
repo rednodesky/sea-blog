@@ -1,6 +1,8 @@
 package com.sea.service;
 
+import com.sea.dao.BlogRepository;
 import com.sea.dao.CommentRepository;
+import com.sea.modal.Blog;
 import com.sea.modal.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private BlogRepository blogRepository;
+
     public List<Comment> findAllByBlogId(Long blogId){
         List<Comment> data = commentRepository.findAllByBlogId(blogId);
         data.forEach(i->{
@@ -32,5 +37,11 @@ public class CommentService {
         comment.setBlogId(blogId);
         comment.setCreateTime(new Date());
         commentRepository.save(comment);
+
+        Blog blog = blogRepository.getOne(blogId);
+        blog.setCommentCount(blog.getCommentCount()+1);
+        blogRepository.save(blog);
+
+
     }
 }

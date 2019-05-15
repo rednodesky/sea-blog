@@ -56,14 +56,29 @@ public class HomeController {
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("user",SecurityUtils.getSubject().getPrincipal());
-        modelAndView.addObject("carousels",bannerService.findByType(BannerType.CAROUSEL.getCode()));
-        modelAndView.addObject("topics",bannerService.findByType(BannerType.TOPIC.getCode()));
+        modelAndView.addObject("carousels",bannerService.findByType(BannerType.CAROUSEL.getCode())); //轮播
+        modelAndView.addObject("topics",bannerService.findByType(BannerType.TOPIC.getCode())); //副标题
         Page<Blog> blogs = blogService.findAll(1);
         modelAndView.addObject("blogs",blogs);
         modelAndView.addObject("pageCount",blogs.getTotalPages());
 
         return modelAndView;
     }
+
+
+//    @RequestMapping({"/beg"}) //在线讨饭系统  需商户号  暂时搁浅
+//    public ModelAndView beg(){
+//        ModelAndView modelAndView = new ModelAndView("beg");
+//        return modelAndView;
+//    }
+
+
+    @RequestMapping({"/analysis"}) //视频解析系统
+    public ModelAndView analysis(){
+        ModelAndView modelAndView = new ModelAndView("analysis");
+        return modelAndView;
+    }
+
 
     //退出的时候是get请求，主要是用于退出
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -157,6 +172,10 @@ public class HomeController {
         modelAndView.addObject("blog",blog);
         modelAndView.addObject("author",userService.getByUserId(blog.getAuthor()));
         modelAndView.addObject("comments", Collections.EMPTY_LIST);
+
+        blog.setCommentCount(blog.getCommentCount()+1);
+        blogService.updateBlog(blog);
+
         return modelAndView;
     }
 

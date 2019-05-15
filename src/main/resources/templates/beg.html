@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<link href="static/css/base.css" rel="stylesheet">
+<link href="static/css/index.css" rel="stylesheet">
+<link href="static/css/m.css" rel="stylesheet">
+<div th:replace="common/head :: headerFragment"></div>
+<!--</head>-->
+<body>
+<div th:replace="common/head :: header-body"></div>
+
+
+<article   >
+
+
+    <div class="col-xs-12 col-sm-10 col-lg-8 center-block" style="float: none;">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background: linear-gradient(to right,#8ae68a,#5ccdde,#b221ff);"><center><font color="#000000"><b>一个要饭的穷小子...</b></font></center></div>
+            <div class="panel-body">
+                <div class="alert alert-success"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=986098166&amp;site=qq&amp;menu=yes"><img class="img-circle m-b-xs" style="border: 2px solid #1281FF; margin-left:3px; margin-right:3px;" src="https://q4.qlogo.cn/headimg_dl?dst_uin=986098166&amp;spec=100" ;="" width="60px" height="60px" alt="24H全自动在线要饭系统"><br></a>打工是不可能打工的，这辈子都不可能打工的，做生意又不会做，就是要饭这种东西，才能维持得了生活这样子。</div></center>
+                <form name="alipayment" action="pay.php" method="post" target="_blank">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-barcode"></span> 施舍单号</span>
+                        <input size="30" name="WIDout_trade_no" value="20190417173050989" class="form-control">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-shopping-cart"></span> 施舍留言</span>
+                        <input size="30" name="WIDsubject" value="呐～施舍你的！" class="form-control" required="required">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-yen"></span> 施舍金额</span>
+                        <input size="30" name="WIDtotal_fee" value="1" class="form-control" required="required">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+</article>
+
+
+<div th:replace="common/footer :: footer-content"></div>
+<a href="#" class="cd-top">Top</a>
+<div th:replace="common/footer :: footer-lib"></div>
+</body>
+</html>
