@@ -19,7 +19,7 @@
         <div class="author-info" style="margin: 30px 0 40px;">
             <a class="icon" href="/" style="width: 48px;height: 48px;display:inline-block;vertical-align:middle;" ><img style="width: 100%;height: 100%" th:src="${author.icon}? #{author.icon} : @{/static/imgs/avatar.png}"></img></a>
             <div class="info" style="display:inline-block;vertical-align:middle;">
-                <span th:text="${author.nickName}"></span>
+                <span>鱼跃此时海</span><!--th:text="${author.nickName}"-->
                 <div class="meta">
                     <span class="last-update" th:text="${author.updateTime}"></span>
                     <span class="views-count" ></span>

@@ -30,7 +30,7 @@ public class SolrController {
 //    }
 
     @RequestMapping(value = "/add-all",method = RequestMethod.GET)
-    public String addAll(){
+    public HashMapResult addAll(){
         return solrService.addAllArticle();
     }
 

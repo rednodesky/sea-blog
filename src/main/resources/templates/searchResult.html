@@ -12,25 +12,21 @@
 <div th:replace="common/head :: header-body"></div>
 <article  style="min-height: 778px;max-width: 800px;" id="article" th:data-page-count="${pageCount}" >
 
-    <!--blogsbox begin-->
-    <div class="blogsbox" style="width:100%;">
-        <div th:each="blog:${data}" class="blogs" data-scroll-reveal="enter bottom over 1s" >
+    <div class="blogsbox" style="width:100%;" >
+        <div th:each="blog:${data}" th:if="${data.size()>0}" class="blogs" data-scroll-reveal="enter bottom over 1s" >
             <h3 class="blogtitle"><a th:href="'/blog/'+${blog.blogId}" th:target="_self" th:text="${blog.title}"></a></h3>
 
-            <!--<span class="blogpic" th:if="${!#strings.isEmpty(blog.pic)}"><a th:href="'/blog/'+${blog.blogId}" title=""><img th:src="${blog.pic}" alt=""></a></span>-->
-
-            <p class="blogtext" style="overflow:hidden;white-space: normal;text-overflow: ellipsis;-webkit-line-clamp:1" th:utext="${blog.content}">... </p>
+            <p class="blogtext" style="overflow:hidden;white-space: normal;text-overflow: ellipsis;-webkit-line-clamp:1" th:utext="${blog.content}"></p>
             <div class="bloginfo">
                 <ul>
-                    <li class="author"><a href="/" th:text="${blog.authorName}">夏海</a></li>
-                    <!--<li class="lmname"><a href="/">学无止境</a></li>-->
-                    <li class="timer" th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}">2018-5-13</li>
-                    <!--<li class="view"><span th:text="${blog.viewCount}">34567</span>已阅读</li>-->
-                    <!--<li class="like" th:text="${blog.priseCount}">9999</li>-->
+                    <li class="author"><a href="/" >鱼跃此时海</a></li>
+                    <li class="timer" th:text="${#dates.format(blog.createTime,'yyyy-MM-dd')}"></li>
                 </ul>
             </div>
         </div>
+        <div th:if="${data.size()==0}">未搜索到任何结果</div>
     </div>
+
 </article>
 
 <script type="text/x-handlebars-template" id="dataTemplate">
@@ -61,7 +57,6 @@
 <div th:replace="common/footer :: footer-lib"></div>
 
 <script src="static/js/conn.js"></script>
-<script src="static/js/scrollRefresh.js"></script>
 
 </body>
 </html>

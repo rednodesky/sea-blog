@@ -1,6 +1,7 @@
 package com.sea.service;
 
 import com.sea.dao.BlogRepository;
+import com.sea.dao.CategoryRepository;
 import com.sea.modal.Blog;
 import com.sea.modal.HashMapResult;
 import com.sea.modal.SolrBlog;
@@ -34,55 +35,57 @@ public class SolrService {
     @Autowired
     private BlogRepository blogRepository;
 
-    public String addAllArticle(){
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    public HashMapResult addAllArticle(){
         List<SolrBlog> blogs =blogRepository.findAllBlog();
         try {
             client.addBeans("corename",blogs);
             client.commit("corename");
-        }catch (IOException e){
-
-        }catch (SolrServerException e2){
-
+        }catch (IOException|SolrServerException e){
+            e.printStackTrace();
+            return HashMapResult.failur(e.getMessage());
         }
-        return "success";
+        return HashMapResult.success();
     }
 
-//    public String add(){
-//        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-//        try {
-//            SolrInputDocument doc = new SolrInputDocument();
-//            doc.setField("id", uuid);
-//            doc.setField("content_ik", "我是中国人, 我爱中国");
-//
-//            /* 如果spring.data.solr.host 里面配置到 core了, 那么这里就不需要传 collection1 这个参数
-//             * 下面都是一样的
-//             */
-//            client.add("corename", doc);
-//            //client.commit();
-//            client.commit("corename");
-//            return uuid;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "error";
-//    }
+    public HashMapResult add(Long blogId){
+        try {
+            Blog blog = blogRepository.getOne(blogId);
+            SolrInputDocument doc = new SolrInputDocument();
+            doc.setField("blogId", blog.getBlogId());
+            doc.setField("title", blog.getTitle());
+            doc.setField("content", blog.getContent());
+            doc.setField("createTime", blog.getCreateTime());
+            doc.setField("authorName", blog.getAuthorName());
+            doc.setField("categoryName", categoryRepository.getOne(blog.getCategoryId()).getName());
 
-//    /**
-//     * 根据id删除索引
-//     * @param id
-//     * @return
-//     */
-//    public String delete(String id)  {
-//        try {
-//            client.deleteById("corename",id);
-//            client.commit("corename");
-//
-//            return id;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "error";
-//    }
+            client.add("corename", doc);
+            //client.commit();
+            client.commit("corename");
+            return HashMapResult.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HashMapResult.failur(e.getMessage());
+        }
+    }
+
+    /**
+     * 根据id删除索引
+     * @param id
+     * @return
+     */
+    public HashMapResult delete(String id)  {
+        try {
+            client.deleteById("corename",id);
+            client.commit("corename");
+            return HashMapResult.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HashMapResult.failur(e.getMessage());
+        }
+    }
 
     /**
      * 删除所有的索引
@@ -101,16 +104,7 @@ public class SolrService {
         return "error";
     }
 
-//    /**
-//     * 根据id查询索引
-//     * @return
-//     * @throws Exception
-//     */
-//    public String getById() throws Exception {
-//        SolrDocument document = client.getById("corename", "1");
-//        System.out.println(document);
-//        return document.toString();
-//    }
+
 
     /**
      * 综合查询: 在综合查询中, 有按条件查询, 条件过滤, 排序, 分页, 高亮显示, 获取部分域信息
@@ -159,6 +153,8 @@ public class SolrService {
             List<SolrBlog> data=new ArrayList<>();
             for (SolrDocument result : results) {
                 SolrBlog blog = SolrUtil.getBean(SolrBlog.class, result);
+                String withoutHtmlContent = blog.getContent().replaceAll("<(!|/)?(.|\\n)*?>", "");
+                blog.setContent(withoutHtmlContent);
                 data.add(blog);
             }
 
@@ -167,16 +163,21 @@ public class SolrService {
             int pageSize = Double.valueOf(numFound/limit).intValue();
             pageSize = (Double.valueOf(numFound/limit)-pageSize)>0?pageSize+1:pageSize;
 
+
+
             HashMapResult hashMapResult = HashMapResult.success();
             hashMapResult.put("page",page);
             hashMapResult.put("data",data);
             hashMapResult.put("pageSize",pageSize);
+
+
+
             return hashMapResult;
 
         } catch (Exception e) {
             e.printStackTrace();
+            return HashMapResult.failur("");
         }
-        return null;
     }
 
 }
